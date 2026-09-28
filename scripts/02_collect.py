@@ -37,6 +37,18 @@ for page_number in range(1, 4):
     soup = BeautifulSoup(response.text, "html.parser")
     # 첫 번째 wikitable만 대상으로 삼습니다.
     table = soup.select_one("table.wikitable")
+    # 첫 번째 표의 헤더 이름을 읽습니다.
+    header_cells = table.select_one("tr").find_all(["td", "th"]) if table is not None else []
+    # 헤더 글자를 소문자 목록으로 정리합니다.
+    header_names = [cell.get_text(" ", strip=True).lower() for cell in header_cells]
+    # 실제 표의 열 위치를 헤더 이름으로 찾습니다.
+    name_index = header_names.index("name")
+    # 실제 표의 방문객 수 열 위치를 찾습니다.
+    visitors_index = header_names.index("visitors")
+    # 실제 표의 도시 열 위치를 찾습니다.
+    city_index = header_names.index("city")
+    # 실제 표의 국가 열 위치를 찾습니다.
+    country_index = header_names.index("country")
     # 현재 페이지의 수집 시각을 한국 시간으로 기록합니다.
     scraped_at = datetime.now(ZoneInfo("Asia/Seoul")).isoformat(timespec="seconds")
     # 현재 페이지의 행을 담을 목록을 만듭니다.
@@ -51,20 +63,20 @@ for page_number in range(1, 4):
             if len(cells) < 4 or any(cell.name == "th" for cell in cells):
                 continue
             # 박물관 이름 셀에서 연결된 링크를 찾습니다.
-            name_link = cells[0].find("a", href=True)
+            name_link = cells[name_index].find("a", href=True)
             # 박물관 이름을 화면에 보이는 링크 텍스트 그대로 추출합니다.
-            name = name_link.get_text(" ", strip=True) if name_link else cells[0].get_text(" ", strip=True)
+            name = name_link.get_text(" ", strip=True) if name_link else cells[name_index].get_text(" ", strip=True)
             # 박물관 이름 링크를 전체 HTTPS 주소로 변환합니다.
             detail_url = urljoin(LIST_URL, name_link["href"]) if name_link else ""
             # HTTP로 시작하는 링크는 HTTPS로 맞춥니다.
             if detail_url.startswith("http://"):
                 detail_url = "https://" + detail_url[len("http://"):]
             # 두 번째 셀의 글자를 그대로 저장합니다.
-            city_raw = cells[1].get_text(" ", strip=True)
+            city_raw = cells[city_index].get_text(" ", strip=True)
             # 세 번째 셀의 글자를 그대로 저장합니다.
-            country_raw = cells[2].get_text(" ", strip=True)
+            country_raw = cells[country_index].get_text(" ", strip=True)
             # 네 번째 셀의 글자를 그대로 저장합니다.
-            visitors_raw = cells[3].get_text(" ", strip=True)
+            visitors_raw = cells[visitors_index].get_text(" ", strip=True)
             # 현재 행을 지정한 열 순서로 추가합니다.
             page_rows.append({"name": name, "city_raw": city_raw, "country_raw": country_raw, "visitors_raw": visitors_raw, "detail_url": detail_url, "scraped_at": scraped_at})
     # 페이지 주소와 응답 상태와 행 수를 출력합니다.
