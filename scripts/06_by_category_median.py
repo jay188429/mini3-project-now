@@ -16,7 +16,7 @@ CHART_PATH = Path(__file__).resolve().parent.parent / "charts" / "by_category_me
 # 정제 CSV만 읽습니다.
 clean = pd.read_csv(CLEAN_PATH, encoding="utf-8-sig")
 # 범주별 개수와 평균과 중앙값을 계산합니다.
-summary = clean.groupby("visitors", sort=True)["city"].agg(["count", "mean", "median"]).reset_index()
+summary = clean.groupby("country", sort=True)["visitors"].agg(["count", "mean", "median"]).reset_index()
 # 범주 순서를 고정합니다.
 positions = range(len(summary))
 # 그림을 만듭니다.
@@ -30,7 +30,7 @@ for position, bar, median, count in zip(positions, bars, summary["median"], summ
 # 가로축에 범주 이름을 표시합니다.
 ax.set_xticks(list(positions))
 # 범주 이름이 겹치지 않도록 회전합니다.
-ax.set_xticklabels(summary["visitors"], rotation=45, ha="right")
+ax.set_xticklabels(summary["country"], rotation=45, ha="right")
 # 가로축 이름을 영어로 지정합니다.
 ax.set_xlabel("Country category")
 # 세로축 이름을 영어로 지정합니다.
@@ -50,15 +50,15 @@ print("| 범주 | 개수 | 평균 | 중앙값 |\n|---|---:|---:|---:|")
 # 각 범주의 평균과 중앙값을 출력합니다.
 for _, row in summary.iterrows():
     # 현재 범주의 실제 값을 출력합니다.
-    print(f"| {row['visitors']} | {int(row['count'])} | {row['mean']:.2f} | {row['median']:.2f} |")
+    print(f"| {row['country']} | {int(row['count'])} | {row['mean']:.2f} | {row['median']:.2f} |")
 # 평균 순위와 중앙값 순위를 계산합니다.
-mean_order = summary.sort_values(["mean", "visitors"], ascending=[False, True])["visitors"].tolist()
+mean_order = summary.sort_values(["mean", "country"], ascending=[False, True])["country"].tolist()
 # 중앙값 순위를 계산합니다.
-median_order = summary.sort_values(["median", "visitors"], ascending=[False, True])["visitors"].tolist()
+median_order = summary.sort_values(["median", "country"], ascending=[False, True])["country"].tolist()
 # 두 순위 목록을 출력합니다.
 print(f"평균 순위: {' > '.join(mean_order)}")
 print(f"중앙값 순위: {' > '.join(median_order)}")
 # 순위가 달라진 범주를 출력합니다.
-changed = [category for category in summary["visitors"] if mean_order.index(category) != median_order.index(category)]
+changed = [category for category in summary["country"] if mean_order.index(category) != median_order.index(category)]
 # 순위 변화 범주를 출력합니다.
 print(f"순위가 바뀐 그룹: {', '.join(changed) if changed else '없음'}")

@@ -1,4 +1,4 @@
-﻿name,city_raw,country_raw,visitors_raw,detail_url,scraped_at,city,country,visitors
+﻿name,city_raw,country_raw,visitors_raw,detail_url,scraped_at,visitors,city,country
 Louvre,"9,000,000 (2025) [ 1 ]",Paris,France,https://en.wikipedia.org/wiki/Louvre,2026-09-28T22:02:31+09:00,9000000,Paris,France
 National Museum of China,"6,956,800 (2024) [ 2 ]",Beijing,China,https://en.wikipedia.org/wiki/National_Museum_of_China,2026-09-28T22:02:31+09:00,6956800,Beijing,China
 Vatican Museums,"6,933,822 (2025) [ 3 ]","Vatican City , Rome",Vatican,https://en.wikipedia.org/wiki/Vatican_Museums,2026-09-28T22:02:31+09:00,6933822,"Vatican City , Rome",Vatican

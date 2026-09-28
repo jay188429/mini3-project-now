@@ -8,7 +8,7 @@ CLEAN_PATH = Path(__file__).resolve().parent.parent / "data" / "clean.csv"
 # 정제 CSV만 읽습니다.
 clean = pd.read_csv(CLEAN_PATH, encoding="utf-8-sig")
 # 통계를 계산할 실제 숫자 열을 지정합니다.
-NUMBER_COLUMN = "city"
+NUMBER_COLUMN = "visitors"
 # 숫자 열의 값으로 통계를 계산합니다.
 values = clean[NUMBER_COLUMN]
 # 최소값 행을 찾습니다.
@@ -30,9 +30,9 @@ print("| 항목 | 값 |\n|---|---:|")
 # 개수와 정제 행 수를 출력합니다.
 print(f"| 개수 | {count} (정제 행 수 {len(clean)} · {'같음' if count == len(clean) else '다름'}) |")
 # 최소값과 해당 행의 이름과 범주를 출력합니다.
-print(f"| 최소 | {minimum} — {minimum_row['name']} · {minimum_row['visitors']} |")
+print(f"| 최소 | {minimum} — {minimum_row['name']} · {minimum_row['country']} |")
 # 최대값과 해당 행의 이름과 범주를 출력합니다.
-print(f"| 최대 | {maximum} — {maximum_row['name']} · {maximum_row['visitors']} |")
+print(f"| 최대 | {maximum} — {maximum_row['name']} · {maximum_row['country']} |")
 # 평균을 소수 둘째 자리까지 출력합니다.
 print(f"| 평균 | {mean:.2f} |")
 # 중앙값을 계산된 값 그대로 출력합니다.

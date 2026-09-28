@@ -44,7 +44,7 @@
 
 ## M06 분포
 
-숫자 열: `city` (방문객 수) · 가로축: Visitors (people) · 세로축: Number of museums
+숫자 열: `visitors` (방문객 수) · 가로축: Visitors (people) · 세로축: Number of museums
 
 구간 경계: 1,000,000부터 10,000,000까지 1,000,000 폭 · 왼쪽 끝 포함·오른쪽 끝 미포함 · 마지막 구간만 오른쪽 끝 포함
 
@@ -72,7 +72,7 @@
 
 ## M07 범주별 비교
 
-숫자 열: `city` (방문객 수) · 범주 열: `visitors` (국가 값) · 그림: `charts/by_category.png`
+숫자 열: `visitors` (방문객 수) · 범주 열: `country` (국가) · 그림: `charts/by_category.png`
 
 ### ① 범주별 평균 표
 
@@ -123,9 +123,9 @@
 생김새 조사: `city_raw` 모양 7가지 · `country_raw` 모양 42가지 · `visitors_raw` 모양 21가지 · 각 열 빈칸 0 · `detail_url` 중복 0 · 72행
 
 규칙
-1. `city_raw`의 앞쪽 방문객 수에서 숫자와 쉼표만 남기고 쉼표를 뺀 뒤 정수형 `city`로 바꾼다. 괄호 안 연도·설명과 대괄호 각주는 뗀다.
-2. `country_raw`의 앞뒤 공백을 정리해 범주형 문자열 `country`로 만든다.
-3. `visitors_raw`의 앞뒤 공백을 정리해 범주형 문자열 `visitors`로 만든다.
+1. 실제 표의 방문객 수가 들어 있는 `city_raw`에서 숫자와 쉼표만 남기고 쉼표를 뺀 뒤 정수형 `visitors`로 바꾼다. 괄호 안 연도·설명과 대괄호 각주는 뗀다.
+2. 실제 표의 도시가 들어 있는 `country_raw`의 앞뒤 공백을 정리해 문자열 `city`로 만든다.
+3. 실제 표의 국가가 들어 있는 `visitors_raw`의 앞뒤 공백을 정리해 문자열 `country`로 만든다.
 4. 숫자로 못 바꾼 값은 0이나 평균으로 채우지 않고 빈칸으로 두며, 해당 행은 사유와 함께 출력한 뒤 뺀다. 이번 조사에서는 0건이다.
 5. `detail_url`이 비어 있거나 중복이면 사유를 출력하고 중복은 첫 행만 남긴다. 이번 조사에서는 0건이다.
 
@@ -133,17 +133,17 @@
 
 | 원문 | 손으로 바꾼 값 | clean.csv 값 | 같나 |
 |---|---|---|---|
-| `city_raw` `9,000,000 (2025) [ 1 ]` | `city` 9000000 | `city` 9000000 |  |
-| `country_raw` `Paris` | `country` Paris | `country` Paris |  |
-| `visitors_raw` `France` | `visitors` France | `visitors` France |  |
+| `city_raw` `9,000,000 (2025) [ 1 ]` | `visitors` 9000000 | `visitors` 9000000 |  |
+| `country_raw` `Paris` | `city` Paris | `city` Paris |  |
+| `visitors_raw` `France` | `country` France | `country` France |  |
 
 전후 숫자
 
 | 항목 | 처리 전 (`raw.csv`) | 처리 후 (`clean.csv`) |
 |---|---:|---:|
-| 첫 줄 | `Louvre` · `city_raw` `9,000,000 (2025) [ 1 ]` · `country_raw` `Paris` · `visitors_raw` `France` | `city` 9000000 · `country` `Paris` · `visitors` `France` |
+| 첫 줄 | `Louvre` · `city_raw` `9,000,000 (2025) [ 1 ]` · `country_raw` `Paris` · `visitors_raw` `France` | `visitors` 9000000 · `city` `Paris` · `country` `France` |
 | 행 수 | 72 | 72 (뺀 행 0) |
-| 데이터형 | `city_raw`, `country_raw`, `visitors_raw`: object | `city`: int64 · `country`, `visitors`: object |
+| 데이터형 | `city_raw`, `country_raw`, `visitors_raw`: object | `visitors`: int64 · `city`, `country`: object |
 | 빈칸 · URL 중복 | 0 · 0 | 0 · 0 |
 
 ## M05 점검표와 기초 통계
@@ -154,15 +154,15 @@
 |---|---|---|---|
 | 수집 범위 | Wikipedia 목록 1페이지 · 72행 | 동일 | M03 수집 기록서 |
 | 행 수 | 72행 | 72행 | 72 - 0 = 72 · 식이 맞음 |
-| 숫자 열 | `city_raw` 글자 · 방문객 수 문자열 | `city` 숫자 · 못 바꾼 값 0건 | 쉼표·괄호·각주를 정리해 정수형으로 변환 |
-| 범주 열 | `country_raw`, `visitors_raw` 글자 | `country`, `visitors` 글자 | 앞뒤 공백 정리 |
+| 숫자 열 | `city_raw` 글자 · 방문객 수 문자열 | `visitors` 숫자 · 못 바꾼 값 0건 | 쉼표·괄호·각주를 정리해 정수형으로 변환 |
+| 범주 열 | `country_raw`, `visitors_raw` 글자 | `city`, `country` 글자 | 앞뒤 공백 정리 |
 | 공백 | 0건 | 0건 | M04 정제 결과 |
-| 필수값 빈칸 | 0건 | 0건 | `name`, `city`, `detail_url` 확인 |
+| 필수값 빈칸 | 0건 | 0건 | `name`, `visitors`, `detail_url` 확인 |
 | `detail_url` 중복 | 0건 | 0건 | 중복이면 첫 행만 남기는 M04 규칙 |
 | 뺀 행 | 해당 없음 | 0건 | 변환 실패·빈칸·중복 없음 |
 | 표본 3행 대조 | M03 표본 기록 있음 | 미확인 | 상세 화면 대조 판정 미기록 |
 
-### ② 기초 통계표 (`city`)
+### ② 기초 통계표 (`visitors`)
 
 | 항목 | 값 |
 |---|---:|
@@ -176,7 +176,7 @@
 
 ### ③ 튀는 값 3개
 
-| 무엇 | 이름 | 화면 값 | `city_raw` | `city` | 일치 |
+| 무엇 | 이름 | 화면 값 | `city_raw` | `visitors` | 일치 |
 |---|---|---|---|---:|---|
 | 가장 작은 값 | Moscow Kremlin Museum | 1,240,113 (2025) | 1,240,113 (2025) [ 3 ] | 1,240,113 | 일치 |
 | 가장 큰 값 | Louvre | 9,000,000 (2025) | 9,000,000 (2025) [ 1 ] | 9,000,000 | 일치 |

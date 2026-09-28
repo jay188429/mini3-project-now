@@ -20,13 +20,14 @@ CARD_PATH = Path(__file__).resolve().parent.parent / "charts" / "eda_card.png"
 # 정제 CSV를 읽습니다.
 clean = pd.read_csv(CLEAN_PATH, encoding="utf-8-sig")
 # 숫자 열을 가져옵니다.
-values = clean["city"]
+values = clean["visitors"]
 # 히스토그램 구간을 기존 M06과 동일하게 지정합니다.
 hist_bins = np.arange(1_000_000, 10_000_001, 1_000_000)
 # 히스토그램 빈도를 계산합니다.
 hist_counts, _ = np.histogram(values, bins=hist_bins)
 # 국가 범주별 평균과 개수를 계산합니다.
-summary = clean.groupby("visitors", sort=True)["city"].agg(["count", "mean"]).reset_index()
+# 국가별 평균과 개수를 계산합니다.
+summary = clean.groupby("country", sort=True)["visitors"].agg(["count", "mean"]).reset_index()
 # 카드 전체 그림과 두 개의 차트 영역을 만듭니다.
 fig = plt.figure(figsize=(16, 12))
 # 카드의 제목과 차트 배치를 지정합니다.
@@ -50,7 +51,7 @@ hist_ax.set_xticklabels([f"{int(value / 1_000_000)}M" for value in hist_bins])
 # 두 번째 차트 영역을 만듭니다.
 category_ax = fig.add_subplot(grid[2, 0])
 # 국가별 평균 막대를 그립니다.
-bars = category_ax.bar(summary["visitors"], summary["mean"])
+bars = category_ax.bar(summary["country"], summary["mean"])
 # 막대마다 평균과 n을 표시합니다.
 for bar, mean, count in zip(bars, summary["mean"], summary["count"]):
     category_ax.text(bar.get_x() + bar.get_width() / 2, bar.get_height(), f"{mean:,.0f}\nn={int(count)}", ha="center", va="bottom", fontsize=7)

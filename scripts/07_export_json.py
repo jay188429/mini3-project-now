@@ -12,7 +12,7 @@ JSON_PATH = Path(__file__).resolve().parent.parent / "data" / "data.json"
 # 정제 CSV를 읽습니다.
 clean = pd.read_csv(CLEAN_PATH, encoding="utf-8-sig")
 # 웹 화면에 필요한 열만 선택합니다.
-web_columns = ["name", "city", "visitors", "detail_url"]
+web_columns = ["name", "visitors", "city", "country", "detail_url"]
 # 선택한 열을 행별 딕셔너리 목록으로 바꿉니다.
 records = clean[web_columns].to_dict(orient="records")
 # JSON을 UTF-8로 사람이 읽기 좋게 저장합니다.

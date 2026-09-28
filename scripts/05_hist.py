@@ -19,8 +19,8 @@ CLEAN_PATH = Path(__file__).resolve().parent.parent / "data" / "clean.csv"
 CHART_PATH = Path(__file__).resolve().parent.parent / "charts" / "hist.png"
 # 정제 CSV를 읽습니다.
 clean = pd.read_csv(CLEAN_PATH, encoding="utf-8-sig")
-# 실제 숫자 열인 city를 사용합니다.
-values = clean["city"].to_numpy()
+# 실제 숫자 열인 visitors를 사용합니다.
+values = clean["visitors"].to_numpy()
 # 최솟값과 최댓값을 감싸는 둥근 구간 경계를 고정합니다.
 bins = np.arange(1_000_000, 10_000_001, 1_000_000)
 # 마지막 구간의 오른쪽 끝을 포함하는 빈도를 계산합니다.

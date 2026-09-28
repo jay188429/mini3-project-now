@@ -16,9 +16,9 @@ CHART_PATH = Path(__file__).resolve().parent.parent / "charts" / "by_category.pn
 # 정제 CSV만 읽습니다.
 clean = pd.read_csv(CLEAN_PATH, encoding="utf-8-sig")
 # 실제 범주 열과 숫자 열을 지정합니다.
-CATEGORY_COLUMN = "visitors"
-# 실제 숫자 열인 city를 지정합니다.
-NUMBER_COLUMN = "city"
+CATEGORY_COLUMN = "country"
+# 실제 숫자 열인 visitors를 지정합니다.
+NUMBER_COLUMN = "visitors"
 # 범주별 개수·합·평균을 계산하고 범주 이름순으로 정렬합니다.
 summary = clean.groupby(CATEGORY_COLUMN, sort=True)[NUMBER_COLUMN].agg(["count", "sum", "mean"]).reset_index()
 # 범주 이름을 문자열로 바꿉니다.
