@@ -1,0 +1,73 @@
+﻿name,city_raw,country_raw,visitors_raw,detail_url,scraped_at,city,country,visitors
+Louvre,"9,000,000 (2025) [ 1 ]",Paris,France,https://en.wikipedia.org/wiki/Louvre,2026-09-28T22:02:31+09:00,9000000,Paris,France
+National Museum of China,"6,956,800 (2024) [ 2 ]",Beijing,China,https://en.wikipedia.org/wiki/National_Museum_of_China,2026-09-28T22:02:31+09:00,6956800,Beijing,China
+Vatican Museums,"6,933,822 (2025) [ 3 ]","Vatican City , Rome",Vatican,https://en.wikipedia.org/wiki/Vatican_Museums,2026-09-28T22:02:31+09:00,6933822,"Vatican City , Rome",Vatican
+Shenzhen Museum,"6,805,000 (2024) [ 4 ]",Shenzhen,China,https://en.wikipedia.org/wiki/Shenzhen_Museum,2026-09-28T22:02:31+09:00,6805000,Shenzhen,China
+National Museum of Korea,"6,507,483 (2025) [ 5 ]",Seoul,South Korea,https://en.wikipedia.org/wiki/National_Museum_of_Korea,2026-09-28T22:02:31+09:00,6507483,Seoul,South Korea
+British Museum,"6,440,120 (2025) [ 3 ]",London,United Kingdom,https://en.wikipedia.org/wiki/British_Museum,2026-09-28T22:02:31+09:00,6440120,London,United Kingdom
+China Science and Technology Museum,"6,421,000 (2024) [ 4 ]",Beijing,China,https://en.wikipedia.org/wiki/China_Science_and_Technology_Museum,2026-09-28T22:02:31+09:00,6421000,Beijing,China
+"Natural History Museum, South Kensington","6,301,972 (2024) [ 6 ]",London,United Kingdom,"https://en.wikipedia.org/wiki/Natural_History_Museum,_London",2026-09-28T22:02:31+09:00,6301972,London,United Kingdom
+Metropolitan Museum of Art,"5,984,091 (2025) [ 3 ]",New York City,United States,https://en.wikipedia.org/wiki/Metropolitan_Museum_of_Art,2026-09-28T22:02:31+09:00,5984091,New York City,United States
+Nanjing Museum,"5,680,000 (2024) [ 4 ]",Nanjing,China,https://en.wikipedia.org/wiki/Nanjing_Museum,2026-09-28T22:02:31+09:00,5680000,Nanjing,China
+American Museum of Natural History,"5,400,000 (2024) [ 4 ]",New York City,United States,https://en.wikipedia.org/wiki/American_Museum_of_Natural_History,2026-09-28T22:02:31+09:00,5400000,New York City,United States
+Tate Modern,"4,603,025 (2024) [ 7 ]",London,United Kingdom,https://en.wikipedia.org/wiki/Tate_Modern,2026-09-28T22:02:31+09:00,4603025,London,United Kingdom
+Hubei Provincial Museum,"4,356,943 (2024) [ 8 ]",Wuhan,China,https://en.wikipedia.org/wiki/Hubei_Provincial_Museum,2026-09-28T22:02:31+09:00,4356943,Wuhan,China
+Shanghai Museum East,"4,230,000 (2024) [ 9 ]",Shanghai,China,https://en.wikipedia.org/wiki/Shanghai_Museum_East,2026-09-28T22:02:31+09:00,4230000,Shanghai,China
+National Gallery of Art,"3,936,543 (2024) [ 10 ]","Washington, D.C.",United States,https://en.wikipedia.org/wiki/National_Gallery_of_Art,2026-09-28T22:02:31+09:00,3936543,"Washington, D.C.",United States
+National Museum of Natural History,"3,900,000 (2024) [ 11 ]","Washington, D.C.",United States,https://en.wikipedia.org/wiki/National_Museum_of_Natural_History,2026-09-28T22:02:31+09:00,3900000,"Washington, D.C.",United States
+Musée d'Orsay,"3,751,000 (including Musée de l'Orangerie ) (2024) [ 10 ]",Paris,France,https://en.wikipedia.org/wiki/Musée_d'Orsay,2026-09-28T22:02:31+09:00,3751000,Paris,France
+National Museum of Anthropology,"3,700,000 (2024)",Mexico City,Mexico,https://en.wikipedia.org/wiki/National_Museum_of_Anthropology_(Mexico),2026-09-28T22:02:31+09:00,3700000,Mexico City,Mexico
+State Russian Museum,"5,087,276 (2025) [ 3 ]",Saint Petersburg,Russia,https://en.wikipedia.org/wiki/State_Russian_Museum,2026-09-28T22:02:31+09:00,5087276,Saint Petersburg,Russia
+State Hermitage Museum,"3,846,375 (2025) [ 3 ]",Saint Petersburg,Russia,https://en.wikipedia.org/wiki/State_Hermitage_Museum,2026-09-28T22:02:31+09:00,3846375,Saint Petersburg,Russia
+Victoria and Albert Museum,"3,525,700 (2024) [ 10 ]","London , South Kensington",United Kingdom,https://en.wikipedia.org/wiki/Victoria_and_Albert_Museum,2026-09-28T22:02:31+09:00,3525700,"London , South Kensington",United Kingdom
+Prado Museum,"3,457,057 (2024) [ 10 ]",Madrid,Spain,https://en.wikipedia.org/wiki/Prado_Museum,2026-09-28T22:02:31+09:00,3457057,Madrid,Spain
+Centre Pompidou,"3,204,369 (2024) [ 12 ]",Paris,France,https://en.wikipedia.org/wiki/Centre_Pompidou,2026-09-28T22:02:31+09:00,3204369,Paris,France
+National Gallery,"3,203,451 (2024) [ 13 ]",London,United Kingdom,https://en.wikipedia.org/wiki/National_Gallery,2026-09-28T22:02:31+09:00,3203451,London,United Kingdom
+Musée National d'Histoire Naturelle,"3,200,000 (2024) [ 14 ]",Paris,France,https://en.wikipedia.org/wiki/Musée_National_d'Histoire_Naturelle,2026-09-28T22:02:31+09:00,3200000,Paris,France
+National Air and Space Museum,"3,100,000 (2024) [ 11 ]","Washington, D.C.",United States,https://en.wikipedia.org/wiki/National_Air_and_Space_Museum,2026-09-28T22:02:31+09:00,3100000,"Washington, D.C.",United States
+Mevlana Museum,"3,048,000 (2024) [ 15 ]",Konya,Turkey,https://en.wikipedia.org/wiki/Mevlana_Museum,2026-09-28T22:02:31+09:00,3048000,Konya,Turkey
+Galleria degli Uffizi,"2,908,828 (2024) [ 10 ]",Florence,Italy,https://en.wikipedia.org/wiki/Galleria_degli_Uffizi,2026-09-28T22:02:31+09:00,2908828,Florence,Italy
+National Museum of Natural Science,"2,854,455 (2024) [ 16 ]",Taichung,Taiwan,https://en.wikipedia.org/wiki/National_Museum_of_Natural_Science,2026-09-28T22:02:31+09:00,2854455,Taichung,Taiwan
+London Science Museum,"2,827,242 (2024) [ 17 ]",London,United Kingdom,https://en.wikipedia.org/wiki/London_Science_Museum,2026-09-28T22:02:31+09:00,2827242,London,United Kingdom
+Museum of Modern Art,"2,657,377 (2024) [ 10 ]",New York City,United States,https://en.wikipedia.org/wiki/Museum_of_Modern_Art,2026-09-28T22:02:31+09:00,2657377,New York City,United States
+National Museum of Nature and Science,"2,634,997 (2024) [ 18 ]",Tokyo,Japan,https://en.wikipedia.org/wiki/National_Museum_of_Nature_and_Science,2026-09-28T22:02:31+09:00,2634997,Tokyo,Japan
+M+,"2,610,000 (2024) [ 19 ] [ 20 ]",Hong Kong,Hong Kong,https://en.wikipedia.org/wiki/M+,2026-09-28T22:02:31+09:00,2610000,Hong Kong,Hong Kong
+State Tretyakov Gallery,"3,075,976 (2025) [ 3 ]",Moscow,Russia,https://en.wikipedia.org/wiki/State_Tretyakov_Gallery,2026-09-28T22:02:31+09:00,3075976,Moscow,Russia
+Rijksmuseum,"2,500,000 (2024) [ 21 ]",Amsterdam,Netherlands,https://en.wikipedia.org/wiki/Rijksmuseum,2026-09-28T22:02:31+09:00,2500000,Amsterdam,Netherlands
+Tokyo National Museum,"2,460,000 (2024) [ 22 ]",Tokyo,Japan,https://en.wikipedia.org/wiki/Tokyo_National_Museum,2026-09-28T22:02:31+09:00,2460000,Tokyo,Japan
+National 9/11 Museum,"2,400,000 (2024) [ 23 ]",New York City,United States,https://en.wikipedia.org/wiki/National_9/11_Museum,2026-09-28T22:02:31+09:00,2400000,New York City,United States
+Art Gallery of NSW,"2,369,339 (2024) [ 10 ]",Sydney,Australia,https://en.wikipedia.org/wiki/Art_Gallery_of_NSW,2026-09-28T22:02:31+09:00,2369339,Sydney,Australia
+National Museum of Scotland,"2,314,974 (2024) [ 24 ]",Edinburgh,United Kingdom,https://en.wikipedia.org/wiki/National_Museum_of_Scotland,2026-09-28T22:02:31+09:00,2314974,Edinburgh,United Kingdom
+Royal Museums Greenwich,"2,255,753 (2024) [ 25 ]",London,United Kingdom,https://en.wikipedia.org/wiki/Royal_Museums_Greenwich,2026-09-28T22:02:31+09:00,2255753,London,United Kingdom
+Galleria dell'Accademia,"2,189,103 (2024) [ 26 ]",Florence,Italy,https://en.wikipedia.org/wiki/Galleria_dell'Accademia,2026-09-28T22:02:31+09:00,2189103,Florence,Italy
+Smithsonian Museum of American History,"2,100,000 (2024) [ 11 ]","Washington, D.C.",United States,https://en.wikipedia.org/wiki/Smithsonian_Museum_of_American_History,2026-09-28T22:02:31+09:00,2100000,"Washington, D.C.",United States
+National Gallery Singapore,"2,040,481 (2024) [ 27 ]",Singapore,Singapore,https://en.wikipedia.org/wiki/National_Gallery_Singapore,2026-09-28T22:02:31+09:00,2040481,Singapore,Singapore
+21st Century Museum of Contemporary Art,"1,974,773 (2023) [ 28 ]",Kanazawa,Japan,"https://en.wikipedia.org/wiki/21st_Century_Museum_of_Contemporary_Art,_Kanazawa",2026-09-28T22:02:31+09:00,1974773,Kanazawa,Japan
+National Science and Technology Museum,"1,875,372 (2023) [ 29 ]",Kaohsiung,Taiwan,https://en.wikipedia.org/wiki/National_Science_and_Technology_Museum,2026-09-28T22:02:31+09:00,1875372,Kaohsiung,Taiwan
+National Palace Museum,"1,874,994 (2024) [ 30 ]",Taipei,Taiwan,https://en.wikipedia.org/wiki/National_Palace_Museum,2026-09-28T22:02:31+09:00,1874994,Taipei,Taiwan
+National Museum in Kraków,"1,859,484 (2024) [ 10 ]",Kraków,Poland,https://en.wikipedia.org/wiki/National_Museum_in_Kraków,2026-09-28T22:02:31+09:00,1859484,Kraków,Poland
+Van Gogh Museum,"1,840,000 (2024) [ 31 ]",Amsterdam,Netherlands,https://en.wikipedia.org/wiki/Van_Gogh_Museum,2026-09-28T22:02:31+09:00,1840000,Amsterdam,Netherlands
+"The National Art Center, Tokyo","1,755,036 [ 31 ]",Tokyo,Japan,"https://en.wikipedia.org/wiki/The_National_Art_Center,_Tokyo",2026-09-28T22:02:31+09:00,1755036,Tokyo,Japan
+California Science Center,"1,700,000 (2024) [ 32 ]",Los Angeles,United States,https://en.wikipedia.org/wiki/California_Science_Center,2026-09-28T22:02:31+09:00,1700000,Los Angeles,United States
+China National Silk Museum,"1,692,697 (2023) [ 33 ]",Hangzhou,China,https://en.wikipedia.org/wiki/China_National_Silk_Museum,2026-09-28T22:02:31+09:00,1692697,Hangzhou,China
+Kunsthistorisches Museum,"1,688,509 [ 34 ]",Vienna,Austria,https://en.wikipedia.org/wiki/Kunsthistorisches_Museum,2026-09-28T22:02:31+09:00,1688509,Vienna,Austria
+Fujian Museum,"1,676,973 (2023) [ 35 ]",Fuzhou,China,https://en.wikipedia.org/wiki/Fujian_Museum,2026-09-28T22:02:31+09:00,1676973,Fuzhou,China
+Hangzhou Arts and Crafts Museum,"1,641,226 (2023) [ 36 ]",Hangzhou,China,https://en.wikipedia.org/wiki/Hangzhou_Arts_and_Crafts_Museum,2026-09-28T22:02:31+09:00,1641226,Hangzhou,China
+National Museum of African American History and Culture,"1,600,000 (2024) [ 11 ]","Washington, D.C.",United States,https://en.wikipedia.org/wiki/National_Museum_of_African_American_History_and_Culture,2026-09-28T22:02:31+09:00,1600000,"Washington, D.C.",United States
+National Gallery of Victoria,"1,580,303 [ 31 ]",Melbourne,Australia,https://en.wikipedia.org/wiki/National_Gallery_of_Victoria,2026-09-28T22:02:31+09:00,1580303,Melbourne,Australia
+Houston Museum of Natural Science,"1,547,000 (2024) [ 37 ]",Houston,United States,https://en.wikipedia.org/wiki/Houston_Museum_of_Natural_Science,2026-09-28T22:02:31+09:00,1547000,Houston,United States
+National Museum in Warsaw,"1,500,655 (2024) [ 10 ]",Warsaw,Poland,https://en.wikipedia.org/wiki/National_Museum_in_Warsaw,2026-09-28T22:02:31+09:00,1500655,Warsaw,Poland
+Louis Vuitton Foundation,"1,500,000 (2023) [ 38 ]",Paris,France,https://en.wikipedia.org/wiki/Louis_Vuitton_Foundation,2026-09-28T22:02:31+09:00,1500000,Paris,France
+Griffin Museum of Science and Industry,"1,476,000 (2024) [ 4 ]",Chicago,United States,https://en.wikipedia.org/wiki/Griffin_Museum_of_Science_and_Industry,2026-09-28T22:02:31+09:00,1476000,Chicago,United States
+Kaohsiung Museum of Fine Arts,"1,461,406 [ 29 ]",Kaohsiung,Taiwan,https://en.wikipedia.org/wiki/Kaohsiung_Museum_of_Fine_Arts,2026-09-28T22:02:31+09:00,1461406,Kaohsiung,Taiwan
+Acropolis Museum,"1,451,727 [ 31 ]",Athens,Greece,https://en.wikipedia.org/wiki/Acropolis_Museum,2026-09-28T22:02:31+09:00,1451727,Athens,Greece
+Centro Cultural Banco do Brasil,"1,364,208 [ 31 ]",São Paulo,Brazil,https://en.wikipedia.org/wiki/Centro_Cultural_Banco_do_Brasil,2026-09-28T22:02:31+09:00,1364208,São Paulo,Brazil
+Denver Museum of Nature and Science,"1,350,000 (2024) [ 4 ]",Denver,United States,https://en.wikipedia.org/wiki/Denver_Museum_of_Nature_and_Science,2026-09-28T22:02:31+09:00,1350000,Denver,United States
+Art Institute of Chicago,"1,324,241 (2024) [ 10 ]",Chicago,United States,https://en.wikipedia.org/wiki/Art_Institute_of_Chicago,2026-09-28T22:02:31+09:00,1324241,Chicago,United States
+Museum of Science,"1,324,000 (2024) [ 4 ]",Boston,United States,https://en.wikipedia.org/wiki/Museum_of_Science_(Boston),2026-09-28T22:02:31+09:00,1324000,Boston,United States
+Palacio de Cristal del Retiro,"1,318,823 [ b ] [ 31 ]",Madrid,Spain,https://en.wikipedia.org/wiki/Palacio_de_Cristal_del_Retiro,2026-09-28T22:02:31+09:00,1318823,Madrid,Spain
+Guggenheim Museum Bilbao,"1,301,343 (2024) [ 10 ]",Bilbao,Spain,https://en.wikipedia.org/wiki/Guggenheim_Museum_Bilbao,2026-09-28T22:02:31+09:00,1301343,Bilbao,Spain
+Getty Center,"1,301,332 (2024) [ 10 ]",Los Angeles,United States,https://en.wikipedia.org/wiki/Getty_Center,2026-09-28T22:02:31+09:00,1301332,Los Angeles,United States
+Chinese Aviation Museum,"1,292,278 (2023) [ 39 ]",Beijing,China,https://en.wikipedia.org/wiki/Chinese_Aviation_Museum,2026-09-28T22:02:31+09:00,1292278,Beijing,China
+Smithsonian American Art Museum,"1,273,450 (2024) [ 10 ]","Washington, D.C.",United States,https://en.wikipedia.org/wiki/Smithsonian_American_Art_Museum,2026-09-28T22:02:31+09:00,1273450,"Washington, D.C.",United States
+Moscow Kremlin Museum,"1,240,113 (2025) [ 3 ]",Moscow,Russia,https://en.wikipedia.org/wiki/Moscow_Kremlin_Museum,2026-09-28T22:02:31+09:00,1240113,Moscow,Russia
