@@ -1,5 +1,7 @@
 const GEMINI_MODEL = 'gemini-3.8-flash';
 const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`;
+const CATALOG = require('../data/data.json');
+const CATALOG_BY_NAME = new Map(CATALOG.map(item => [item.name, item]));
 
 const RESPONSE_SCHEMA = {
   type: 'object',
@@ -46,6 +48,17 @@ module.exports = async (req, res) => {
   const { minVisitors, country, candidates } = req.body || {};
 
   if (!Array.isArray(candidates) || candidates.length === 0 || candidates.length > 5) {
+    res.status(400).json({ error: 'invalid_candidates' });
+    return;
+  }
+
+  const candidatesMatchCatalog = candidates.every(candidate => {
+    const source = CATALOG_BY_NAME.get(candidate && candidate.name);
+    return source
+      && source.visitors === candidate.visitors
+      && source.country === candidate.country;
+  });
+  if (!candidatesMatchCatalog) {
     res.status(400).json({ error: 'invalid_candidates' });
     return;
   }
