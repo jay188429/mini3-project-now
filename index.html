@@ -336,6 +336,7 @@
       });
       filtered.sort((a, b) => a.visitors - b.visitors);
       currentFiltered = filtered;
+      recommendButton.disabled = filtered.length === 0;
 
       document.getElementById('total').textContent =
         `조건에 맞는 ${filtered.length}개 / 전체 ${allItems.length}개`;
