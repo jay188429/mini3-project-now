@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>미술관 비교 도우미</title>
+<style>
+  body {
+    font-family: -apple-system, "Segoe UI", "Malgun Gothic", sans-serif;
+    background: #f5f5f5;
+    margin: 0;
+    padding: 24px;
+    color: #222;
+  }
+  h1 {
+    margin: 0 0 4px;
+    font-size: 22px;
+  }
+  #total {
+    margin: 0 0 12px;
+    color: #555;
+    font-size: 15px;
+  }
+  #sort-buttons {
+    margin: 0 0 20px;
+  }
+  #sort-buttons button {
+    font-family: inherit;
+    font-size: 13px;
+    padding: 6px 12px;
+    margin-right: 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background: #fff;
+    cursor: pointer;
+  }
+  #sort-buttons button:hover {
+    background: #eee;
+  }
+  #filter-bar {
+    margin: 0 0 20px;
+    padding: 14px 16px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: flex-end;
+  }
+  #filter-bar label {
+    display: flex;
+    flex-direction: column;
+    font-size: 13px;
+    color: #555;
+    gap: 4px;
+  }
+  #filter-bar input,
+  #filter-bar select {
+    font-family: inherit;
+    font-size: 14px;
+    padding: 6px 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+  }
+  #filter-bar button {
+    font-family: inherit;
+    font-size: 14px;
+    padding: 7px 16px;
+    border: 1px solid #1a56db;
+    border-radius: 6px;
+    background: #1a56db;
+    color: #fff;
+    cursor: pointer;
+  }
+  #filter-bar button:hover {
+    background: #1442aa;
+  }
+  #empty-notice {
+    background: #fff8e1;
+    border: 1px solid #ffe082;
+    border-radius: 8px;
+    padding: 16px;
+    font-size: 14px;
+    color: #6b5300;
+  }
+  #recommend-bar {
+    margin: 0 0 20px;
+  }
+  #recommend-button {
+    font-family: inherit;
+    font-size: 14px;
+    padding: 8px 18px;
+    border: 1px solid #0f8a5f;
+    border-radius: 6px;
+    background: #12a06e;
+    color: #fff;
+    cursor: pointer;
+  }
+  #recommend-button:hover {
+    background: #0f8a5f;
+  }
+  #evidence {
+    margin-top: 24px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px 18px;
+  }
+  #evidence h2 {
+    font-size: 17px;
+    margin: 0 0 10px;
+  }
+  #evidence-pick {
+    font-size: 14px;
+    margin: 0 0 12px;
+    color: #12633f;
+  }
+  #evidence-chart-title {
+    font-size: 12px;
+    color: #666;
+    margin: 0 0 6px;
+  }
+  #evidence svg text {
+    font-size: 11px;
+    fill: #555;
+  }
+  #evidence .bar {
+    fill: #90a4c4;
+  }
+  #evidence .bar.highlight {
+    fill: #12a06e;
+  }
+  #cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 14px;
+  }
+  .card {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 14px 16px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+  .card h2 {
+    font-size: 16px;
+    margin: 0 0 8px;
+  }
+  .card p {
+    margin: 4px 0;
+    font-size: 14px;
+    color: #333;
+  }
+  .card a {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 13px;
+    color: #1a56db;
+    text-decoration: none;
+  }
+  .card a:hover {
+    text-decoration: underline;
+  }
+  #eda-section {
+    margin-top: 32px;
+    padding-top: 20px;
+    border-top: 1px solid #ccc;
+  }
+  #eda-section h2 {
+    font-size: 18px;
+    margin: 0 0 16px;
+  }
+  .eda-item {
+    margin-bottom: 20px;
+  }
+  .eda-item img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+  }
+  .eda-item p {
+    font-size: 14px;
+    color: #333;
+    margin: 8px 0 0;
+  }
+  #eda-limit,
+  #eda-source {
+    font-size: 13px;
+    color: #555;
+    margin: 4px 0;
+  }
+</style>
+</head>
+<body>
+  <h1>미술관 비교 도우미</h1>
+  <p id="total">총 0개</p>
+
+  <div id="filter-bar">
+    <label>
+      최소 방문객 수
+      <input type="number" id="min-visitors" min="0" placeholder="예: 2000000">
+    </label>
+    <label>
+      국가
+      <select id="country-select">
+        <option value="">전체</option>
+      </select>
+    </label>
+    <button id="apply-filter">적용</button>
+  </div>
+
+  <div id="recommend-bar">
+    <button id="recommend-button">이 조건으로 추천하기</button>
+  </div>
+
+  <div id="evidence" hidden>
+    <h2>추천 근거</h2>
+    <p id="evidence-pick"></p>
+    <p id="evidence-chart-title"></p>
+    <svg id="evidence-chart" width="100%" height="180" viewBox="0 0 560 180"></svg>
+  </div>
+
+  <div id="sort-buttons">
+    <button id="sort-asc">방문객 적은 순</button>
+    <button id="sort-desc">방문객 많은 순</button>
+  </div>
+  <div id="cards"></div>
+
+  <div id="eda-section">
+    <h2>근거</h2>
+
+    <div class="eda-item">
+      <img src="charts/hist.png" alt="방문객 수 히스토그램">
+      <p>1,000,000~2,000,000 구간이 29개로 가장 많다.</p>
+    </div>
+
+    <div class="eda-item">
+      <img src="charts/by_category.png" alt="국가별 평균 방문객 수">
+      <p>Vatican 평균이 6,933,822로 가장 높고 Brazil 평균이 1,364,208로 가장 낮다.</p>
+    </div>
+
+    <p id="eda-limit">한계: 한 페이지 72행만 사용했고, Vatican·Brazil처럼 n=1인 범주의 평균은 한 행에만 근거한다.</p>
+    <p id="eda-source">출처: 위키백과 목록(List of most-visited museums) 1페이지 · 2026-09-28 수집 · 72개</p>
+  </div>
+
+  <script>
+    let allItems = [];
+    let currentFiltered = [];
+
+    function renderCards(items) {
+      const cardsEl = document.getElementById('cards');
+      cardsEl.innerHTML = '';
+      items.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+          <h2>${item.name}</h2>
+          <p>방문객: ${item.visitors.toLocaleString()}</p>
+          <p>국가: ${item.country}</p>
+          <a href="${item.detail_url}" target="_blank" rel="noopener">원래 화면 보기</a>
+        `;
+        cardsEl.appendChild(card);
+      });
+    }
+
+    function renderEmptyNotice(minVisitors, country) {
+      const cardsEl = document.getElementById('cards');
+      cardsEl.innerHTML = '';
+
+      const parts = [];
+
+      if (minVisitors !== null) {
+        const sameCountry = country
+          ? allItems.filter(i => i.country === country)
+          : allItems;
+        if (sameCountry.length > 0) {
+          const maxVisitors = Math.max(...sameCountry.map(i => i.visitors));
+          const count = sameCountry.filter(i => i.visitors >= maxVisitors).length;
+          parts.push(`방문객 조건만 ${maxVisitors.toLocaleString()}명 이상으로 낮추면 ${count}곳이 보이고`);
+        }
+      }
+
+      if (country) {
+        const countOnlyVisitors = allItems.filter(i =>
+          minVisitors === null || i.visitors >= minVisitors
+        ).length;
+        parts.push(`국가 조건을 없애면 ${countOnlyVisitors}곳이 보입니다`);
+      }
+
+      const guidance = parts.length > 0
+        ? parts.join(', ') + '.'
+        : '조건을 넓히면 후보가 나타납니다.';
+
+      const notice = document.createElement('div');
+      notice.id = 'empty-notice';
+      notice.textContent = `조건에 맞는 미술관이 없습니다. ${guidance}`;
+      cardsEl.appendChild(notice);
+    }
+
+    function applyFilter() {
+      const minInput = document.getElementById('min-visitors').value.trim();
+      const minVisitors = minInput === '' ? null : Number(minInput);
+      const country = document.getElementById('country-select').value;
+
+      let filtered = allItems.filter(item => {
+        if (minVisitors !== null && item.visitors < minVisitors) return false;
+        if (country && item.country !== country) return false;
+        return true;
+      });
+      filtered.sort((a, b) => a.visitors - b.visitors);
+      currentFiltered = filtered;
+
+      document.getElementById('total').textContent =
+        `조건에 맞는 ${filtered.length}개 / 전체 ${allItems.length}개`;
+
+      if (filtered.length === 0) {
+        renderEmptyNotice(minVisitors, country);
+      } else {
+        renderCards(filtered);
+      }
+
+      document.getElementById('evidence').hidden = true;
+    }
+
+    function computeHistogram(items) {
+      const binWidth = 1000000;
+      const start = 1000000;
+      const end = 10000000;
+      const bins = [];
+      for (let b = start; b < end; b += binWidth) {
+        bins.push({ from: b, to: b + binWidth, count: 0 });
+      }
+      items.forEach(item => {
+        const v = item.visitors;
+        for (let i = 0; i < bins.length; i++) {
+          const isLast = i === bins.length - 1;
+          const inBin = isLast ? (v >= bins[i].from && v <= bins[i].to)
+                                : (v >= bins[i].from && v < bins[i].to);
+          if (inBin) {
+            bins[i].count++;
+            break;
+          }
+        }
+      });
+      return bins;
+    }
+
+    function binIndexFor(bins, visitors) {
+      for (let i = 0; i < bins.length; i++) {
+        const isLast = i === bins.length - 1;
+        const inBin = isLast ? (visitors >= bins[i].from && visitors <= bins[i].to)
+                              : (visitors >= bins[i].from && visitors < bins[i].to);
+        if (inBin) return i;
+      }
+      return -1;
+    }
+
+    function renderHistogram(bins, highlightIndex) {
+      const svg = document.getElementById('evidence-chart');
+      svg.innerHTML = '';
+
+      const width = 560, height = 180;
+      const padLeft = 30, padBottom = 24, padTop = 10;
+      const chartW = width - padLeft - 10;
+      const chartH = height - padTop - padBottom;
+      const maxCount = Math.max(...bins.map(b => b.count), 1);
+      const barGap = 4;
+      const barW = chartW / bins.length - barGap;
+
+      bins.forEach((bin, i) => {
+        const barH = (bin.count / maxCount) * chartH;
+        const x = padLeft + i * (barW + barGap);
+        const y = padTop + (chartH - barH);
+
+        const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+        rect.setAttribute('x', x);
+        rect.setAttribute('y', y);
+        rect.setAttribute('width', barW);
+        rect.setAttribute('height', barH);
+        rect.setAttribute('class', 'bar' + (i === highlightIndex ? ' highlight' : ''));
+        svg.appendChild(rect);
+
+        const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        label.setAttribute('x', x + barW / 2);
+        label.setAttribute('y', height - 6);
+        label.setAttribute('text-anchor', 'middle');
+        label.textContent = bin.count;
+        svg.appendChild(label);
+      });
+
+      const axisLabel = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      axisLabel.setAttribute('x', 4);
+      axisLabel.setAttribute('y', padTop + 10);
+      axisLabel.textContent = maxCount;
+      svg.appendChild(axisLabel);
+    }
+
+    function recommend() {
+      const bins = computeHistogram(allItems);
+
+      if (currentFiltered.length === 0) {
+        document.getElementById('evidence-pick').textContent =
+          '조건에 맞는 후보가 없어 추천할 수 없습니다. 아래는 전체 방문객 수 분포입니다.';
+        renderHistogram(bins, -1);
+      } else {
+        const pick = currentFiltered[0];
+        document.getElementById('evidence-pick').textContent =
+          `추천: ${pick.name} · 방문객 ${pick.visitors.toLocaleString()} · ${pick.country} (조건을 만족하는 후보 중 방문객 수가 가장 적은, 조건 경계에 가장 가까운 곳)`;
+        const idx = binIndexFor(bins, pick.visitors);
+        renderHistogram(bins, idx);
+      }
+
+      document.getElementById('evidence-chart-title').textContent =
+        `Visitors distribution (n=${allItems.length})`;
+      document.getElementById('evidence').hidden = false;
+    }
+
+    fetch('data/data.json')
+      .then(res => res.json())
+      .then(items => {
+        allItems = items;
+
+        const countries = [...new Set(items.map(i => i.country))].sort();
+        const select = document.getElementById('country-select');
+        countries.forEach(c => {
+          const opt = document.createElement('option');
+          opt.value = c;
+          opt.textContent = c;
+          select.appendChild(opt);
+        });
+
+        applyFilter();
+      });
+
+    document.getElementById('apply-filter').addEventListener('click', applyFilter);
+    document.getElementById('min-visitors').addEventListener('input', applyFilter);
+    document.getElementById('country-select').addEventListener('change', applyFilter);
+    document.getElementById('recommend-button').addEventListener('click', recommend);
+
+    document.getElementById('sort-asc').addEventListener('click', () => {
+      renderCards([...allItems].sort((a, b) => a.visitors - b.visitors));
+    });
+    document.getElementById('sort-desc').addEventListener('click', () => {
+      renderCards([...allItems].sort((a, b) => b.visitors - a.visitors));
+    });
+  </script>
+</body>
+</html>
