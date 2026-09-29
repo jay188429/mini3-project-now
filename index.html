@@ -472,7 +472,9 @@
           document.getElementById('evidence-pick').textContent =
             failure && failure.error === 'limit'
               ? '사용량 한도에 도달했습니다. 잠시 뒤 다시 눌러 주세요.'
-              : '잠시 뒤 다시 눌러 주세요.';
+              : failure && failure.error === 'invalid_condition'
+                ? '조건을 확인한 뒤 다시 눌러 주세요.'
+                : '잠시 뒤 다시 눌러 주세요.';
           return;
         }
 
