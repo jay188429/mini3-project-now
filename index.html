@@ -449,8 +449,14 @@
       const minInput = document.getElementById('min-visitors').value.trim();
       const minVisitors = minInput === '' ? null : Number(minInput);
       const country = document.getElementById('country-select').value || null;
+      const filterControls = [
+        document.getElementById('min-visitors'),
+        document.getElementById('country-select'),
+        document.getElementById('apply-filter')
+      ];
 
       button.disabled = true;
+      filterControls.forEach(control => { control.disabled = true; });
       button.textContent = '고르는 중…';
       document.getElementById('evidence-pick').textContent = '고르는 중…';
       renderHistogram(bins, -1);
@@ -501,6 +507,7 @@
         document.getElementById('evidence-pick').textContent = '잠시 뒤 다시 눌러 주세요.';
       } finally {
         button.disabled = false;
+        filterControls.forEach(control => { control.disabled = false; });
         button.textContent = '이 조건으로 추천받기';
       }
     }
