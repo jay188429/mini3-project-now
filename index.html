@@ -162,6 +162,14 @@
   .card a:hover {
     text-decoration: underline;
   }
+  .card.recommended {
+    border-color: #12a06e;
+    box-shadow: 0 0 0 2px #12a06e;
+  }
+  #recommend-button:disabled {
+    opacity: 0.6;
+    cursor: default;
+  }
   #eda-section {
     margin-top: 32px;
     padding-top: 20px;
@@ -213,7 +221,7 @@
   </div>
 
   <div id="recommend-bar">
-    <button id="recommend-button">이 조건으로 추천하기</button>
+    <button id="recommend-button">이 조건으로 추천받기</button>
   </div>
 
   <div id="evidence" hidden>
@@ -256,6 +264,7 @@
       items.forEach(item => {
         const card = document.createElement('div');
         card.className = 'card';
+        card.dataset.name = item.name;
         card.innerHTML = `
           <h2>${item.name}</h2>
           <p>방문객: ${item.visitors.toLocaleString()}</p>
@@ -304,6 +313,21 @@
       const minInput = document.getElementById('min-visitors').value.trim();
       const minVisitors = minInput === '' ? null : Number(minInput);
       const country = document.getElementById('country-select').value;
+
+      const recommendButton = document.getElementById('recommend-button');
+      if (minVisitors !== null && (!Number.isFinite(minVisitors) || minVisitors < 0)) {
+        currentFiltered = [];
+        document.getElementById('total').textContent = '조건을 확인해 주세요';
+        cardsEl.innerHTML = '';
+        const notice = document.createElement('div');
+        notice.id = 'empty-notice';
+        notice.textContent = '최소 방문객 수는 0 이상이어야 합니다.';
+        cardsEl.appendChild(notice);
+        recommendButton.disabled = true;
+        document.getElementById('evidence').hidden = true;
+        return;
+      }
+      recommendButton.disabled = false;
 
       let filtered = allItems.filter(item => {
         if (minVisitors !== null && item.visitors < minVisitors) return false;
@@ -398,24 +422,74 @@
       svg.appendChild(axisLabel);
     }
 
-    function recommend() {
+    function highlightCard(name) {
+      document.querySelectorAll('#cards .card').forEach(card => {
+        card.classList.toggle('recommended', name !== null && card.dataset.name === name);
+      });
+    }
+
+    async function recommend() {
       const bins = computeHistogram(allItems);
+      const button = document.getElementById('recommend-button');
+
+      highlightCard(null);
+      document.getElementById('evidence-chart-title').textContent =
+        `Visitors distribution (n=${allItems.length})`;
+      document.getElementById('evidence').hidden = false;
 
       if (currentFiltered.length === 0) {
         document.getElementById('evidence-pick').textContent =
           '조건에 맞는 후보가 없어 추천할 수 없습니다. 아래는 전체 방문객 수 분포입니다.';
         renderHistogram(bins, -1);
-      } else {
-        const pick = currentFiltered[0];
-        document.getElementById('evidence-pick').textContent =
-          `추천: ${pick.name} · 방문객 ${pick.visitors.toLocaleString()} · ${pick.country} (조건을 만족하는 후보 중 방문객 수가 가장 적은, 조건 경계에 가장 가까운 곳)`;
-        const idx = binIndexFor(bins, pick.visitors);
-        renderHistogram(bins, idx);
+        return;
       }
 
-      document.getElementById('evidence-chart-title').textContent =
-        `Visitors distribution (n=${allItems.length})`;
-      document.getElementById('evidence').hidden = false;
+      const candidates = currentFiltered.slice(0, 5);
+      const minInput = document.getElementById('min-visitors').value.trim();
+      const minVisitors = minInput === '' ? null : Number(minInput);
+      const country = document.getElementById('country-select').value || null;
+
+      button.disabled = true;
+      button.textContent = '고르는 중…';
+      document.getElementById('evidence-pick').textContent = '고르는 중…';
+      renderHistogram(bins, -1);
+
+      try {
+        const res = await fetch('/api/recommend', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            minVisitors,
+            country,
+            candidates: candidates.map(c => ({ name: c.name, visitors: c.visitors, country: c.country }))
+          })
+        });
+
+        if (!res.ok) {
+          document.getElementById('evidence-pick').textContent = '잠시 뒤 다시 눌러 주세요.';
+          return;
+        }
+
+        const data = await res.json();
+
+        if (data.error || !candidates.some(c => c.name === data.name)) {
+          document.getElementById('evidence-pick').textContent = '추천을 확인하지 못했습니다.';
+          return;
+        }
+
+        document.getElementById('evidence-pick').textContent =
+          `추천: ${data.name} — ${data.reason1} ${data.reason2}`;
+
+        const pick = candidates.find(c => c.name === data.name);
+        const idx = binIndexFor(bins, pick.visitors);
+        renderHistogram(bins, idx);
+        highlightCard(data.name);
+      } catch (err) {
+        document.getElementById('evidence-pick').textContent = '잠시 뒤 다시 눌러 주세요.';
+      } finally {
+        button.disabled = false;
+        button.textContent = '이 조건으로 추천받기';
+      }
     }
 
     fetch('data/data.json')

@@ -277,7 +277,30 @@ JSON 72개 = 화면 72개
 | 실패 처리 | 후보 0개 → AI를 부르지 않고 M10 안내만 / AI가 답을 못 줌(한도 초과 포함) → 「잠시 뒤 다시 눌러 주세요」 한 줄 / 답의 이름이 후보 5개에 없음 → 추천을 보여주지 않고 「추천을 확인하지 못했습니다」 한 줄 |
 | 보내지 않는 것 | 사람 이름 · 연락처 같은 개인정보 · 후보 표에 없는 값 · 열쇠(API 키) |
 | 확인 방법 | 추천 이유 속 방문객 수 · 국가를 `data/data.json`의 같은 이름 항목과 대 본다 · 추천된 이름이 후보 5개 안에 있는지 본다 |
+| 같은 조건이면 같은 추천? | **예** — 이 화면의 추천 규칙은 "후보 중 방문객 수가 가장 적어 조건 경계에 가장 가까운 곳"으로 이미 하나로 정해져 있다(동점이 아닌 한 정답이 하나뿐이다). 매번 다르게 나오면 규칙을 어긴 것이지 다양성이 아니다 |
+
+예라고 정했으니 다음 칸 프롬프트에 더할 것 — 「같은 후보 목록이면 같은 곳을 고르게, 방문객 수가 가장 적은 곳부터 따져 보라」 한 줄
 
 ### 열쇠 자리 확인
 
 `.env`에 `GEMINI_API_KEY=` 한 줄(값은 비어 있음, 직접 채울 예정) · `.gitignore`에 `.env` 한 줄 · 올라갈 목록에 `.env` 없음
+
+## M13 AI 추천 동작본
+
+배포 주소 (Domains) : https://world-museum-atlas.vercel.app
+
+환경변수 `GEMINI_API_KEY` - Secret · Production · Redeploy : [ ] 확인 필요 (Vercel 대시보드에서 직접 확인)
+
+| 조건 | AI에게 넘긴 후보 (방문객 수 낮은 순) | 추천된 이름 | 후보 안? |
+|---|---|---|---|
+| 국가 United States · 방문객 2,000,000 이상 | Smithsonian Museum of American History 2,100,000 · National 9/11 Museum 2,400,000 · Museum of Modern Art 2,657,377 · National Air and Space Museum 3,100,000 · National Museum of Natural History 3,900,000 | Smithsonian Museum of American History | 예 |
+| 국가 United States · 방문객 3,000,000 이상 | National Air and Space Museum 3,100,000 · National Museum of Natural History 3,900,000 · National Gallery of Art 3,936,543 · American Museum of Natural History 5,400,000 · Metropolitan Museum of Art 5,984,091 | National Air and Space Museum | 예 |
+
+두 조건의 추천이 서로 다른가 : 예 — 조건을 바꾸자 후보 목록이 통째로 바뀌었고(경계값 아래 후보가 빠짐), 두 목록 모두 방문객 수가 가장 적은 곳이 추천되어 Smithsonian Museum of American History → National Air and Space Museum 으로 달라짐
+소스 보기에서 GEMINI · 열쇠 앞 네 글자 : [ ] 확인 필요 (배포 주소에서 Ctrl+U 로 직접 확인)
+
+### 가는 길에 고친 것
+
+`api/recommend.js`가 처음엔 존재하지 않는 Gemini 엔드포인트(`v1beta/interactions`)와 스키마(`input` · `response_format`)로 짜여 있어 배포해도 실제로는 호출이 실패하는 상태였음. 공식 문서(`ai.google.dev/api/generate-content`) 기준 `v1beta/models/{model}:generateContent` 형식 — `contents[].parts[].text` · `systemInstruction` · `generationConfig.responseMimeType/responseSchema` — 으로 바로잡음.
+
+위 표의 두 결과는 이 수정본과 똑같은 요청 형식으로 실제 Gemini API를 **터미널에서 직접 호출**해 받은 값(추천 규칙: 후보 중 방문객 수 가장 적은 곳부터 따짐 · 후보 밖 이름 없음 확인됨). 배포 주소의 단추를 직접 눌러 본 결과는 아니므로, Vercel에 `GEMINI_API_KEY` 를 넣고 Redeploy 한 뒤 `https://world-museum-atlas.vercel.app` 에서 위 두 조건을 눌러 화면에 뜬 이름과 이 표가 같은지 · 소스 보기에 열쇠가 없는지 마지막으로 확인 필요
