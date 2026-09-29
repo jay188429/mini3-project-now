@@ -95,6 +95,10 @@ module.exports = async (req, res) => {
     });
 
     if (!response.ok) {
+      if (response.status === 429) {
+        res.status(429).json({ error: 'limit' });
+        return;
+      }
       res.status(502).json({ error: 'upstream_error', status: response.status });
       return;
     }
