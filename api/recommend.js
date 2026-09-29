@@ -1,4 +1,4 @@
-const GEMINI_MODEL = 'gemini-3.8-flash';
+const GEMINI_MODEL = 'gemini-flash-latest';
 const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`;
 const CATALOG = require('../data/data.json');
 const CATALOG_BY_NAME = new Map(CATALOG.map(item => [item.name, item]));
