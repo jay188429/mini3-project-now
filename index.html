@@ -315,13 +315,13 @@
       const country = document.getElementById('country-select').value;
 
       const recommendButton = document.getElementById('recommend-button');
-      if (minVisitors !== null && (!Number.isFinite(minVisitors) || minVisitors < 0)) {
+      if (minVisitors !== null && (!Number.isInteger(minVisitors) || minVisitors < 0)) {
         currentFiltered = [];
         document.getElementById('total').textContent = '조건을 확인해 주세요';
         cardsEl.innerHTML = '';
         const notice = document.createElement('div');
         notice.id = 'empty-notice';
-        notice.textContent = '최소 방문객 수는 0 이상이어야 합니다.';
+        notice.textContent = '최소 방문객 수는 0 이상의 정수여야 합니다.';
         cardsEl.appendChild(notice);
         recommendButton.disabled = true;
         document.getElementById('evidence').hidden = true;
