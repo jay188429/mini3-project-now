@@ -65,7 +65,9 @@ module.exports = async (req, res) => {
     const source = CATALOG_BY_NAME.get(candidate && candidate.name);
     return source
       && source.visitors === candidate.visitors
-      && source.country === candidate.country;
+      && source.country === candidate.country
+      && (minVisitors === null || minVisitors === undefined || source.visitors >= minVisitors)
+      && (!country || source.country === country);
   });
   if (!candidatesMatchCatalog) {
     res.status(400).json({ error: 'invalid_candidates' });
