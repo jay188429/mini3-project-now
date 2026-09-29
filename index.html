@@ -474,6 +474,8 @@
               ? '사용량 한도에 도달했습니다. 잠시 뒤 다시 눌러 주세요.'
               : failure && failure.error === 'invalid_condition'
                 ? '조건을 확인한 뒤 다시 눌러 주세요.'
+                : failure && failure.error === 'invalid_candidates'
+                  ? '추천 후보를 확인하지 못했습니다. 조건을 다시 적용해 주세요.'
                 : '잠시 뒤 다시 눌러 주세요.';
           return;
         }
@@ -481,7 +483,10 @@
         const data = await res.json();
 
         if (data.error || !candidates.some(c => c.name === data.name)) {
-          document.getElementById('evidence-pick').textContent = '추천을 확인하지 못했습니다.';
+          document.getElementById('evidence-pick').textContent =
+            data.error === 'not_in_candidates'
+              ? '추천 이름이 후보 목록에 없어 확인하지 못했습니다.'
+              : '추천을 확인하지 못했습니다.';
           return;
         }
 
