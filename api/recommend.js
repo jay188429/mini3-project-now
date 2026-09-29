@@ -60,6 +60,10 @@ module.exports = async (req, res) => {
     res.status(400).json({ error: 'invalid_candidates' });
     return;
   }
+  if (new Set(candidates.map(candidate => candidate && candidate.name)).size !== candidates.length) {
+    res.status(400).json({ error: 'invalid_candidates' });
+    return;
+  }
 
   const candidatesMatchCatalog = candidates.every(candidate => {
     const source = CATALOG_BY_NAME.get(candidate && candidate.name);
