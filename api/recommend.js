@@ -2,6 +2,7 @@ const GEMINI_MODEL = 'gemini-flash-latest';
 const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`;
 const CATALOG = require('../data/data.json');
 const CATALOG_BY_NAME = new Map(CATALOG.map(item => [item.name, item]));
+const COUNTRIES = new Set(CATALOG.map(item => item.country));
 
 const RESPONSE_SCHEMA = {
   type: 'object',
@@ -46,6 +47,14 @@ module.exports = async (req, res) => {
   }
 
   const { minVisitors, country, candidates } = req.body || {};
+
+  const validMinVisitors = minVisitors === null || minVisitors === undefined
+    || (Number.isInteger(minVisitors) && minVisitors >= 0);
+  const validCountry = country === null || country === undefined || COUNTRIES.has(country);
+  if (!validMinVisitors || !validCountry) {
+    res.status(400).json({ error: 'invalid_condition' });
+    return;
+  }
 
   if (!Array.isArray(candidates) || candidates.length === 0 || candidates.length > 5) {
     res.status(400).json({ error: 'invalid_candidates' });
