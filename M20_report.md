@@ -18,6 +18,8 @@
 | 바꾼 규칙 | 방문객 수의 쉼표·괄호·각주를 제거해 정수형 `visitors`로 변환 · 도시·국가 앞뒤 공백 정리 |
 | 원문과 대조 | 표본 3곳 중 3곳 일치 |
 
+**다시 모으려면:** 프로젝트 루트 폴더에서 `python scripts/03_clean.py` → `python scripts/04_stats.py` → `python scripts/05_hist.py` → `python scripts/06_by_category.py` → `python scripts/07_export_json.py` 순서로 실행한다. `data/clean.csv`는 72행, `data/data.json`은 72개가 다시 만들어지며 빈칸·중복 행은 0개다.
+
 ## 3. 탐색 — 그림 두 장
 
 ### 그림 1. 방문객 수는 어느 구간에 모이나
