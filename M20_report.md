@@ -1,6 +1,6 @@
 # LUMEN ATLAS 보고서 — 문제 · 데이터 · 그림
 
-작성 : LUMEN ATLAS 운영 기록 · 배포 주소 : https://world-museum-atlas.vercel.app · 저장소 : https://github.com/jay188429/museum-compare-guide
+배포 주소 : https://world-museum-atlas.vercel.app
 
 ## 1. 문제와 대상
 
