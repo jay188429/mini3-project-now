@@ -20,6 +20,7 @@
     padding: 24px;
     color: #f7fbff;
   }
+  :focus-visible { outline: 3px solid #f7d995; outline-offset: 3px; }
   h1 {
     margin: 0 0 4px;
     font-size: 22px;
@@ -451,8 +452,8 @@
   </section>
 
   <div id="sort-buttons">
-    <button id="sort-asc">방문객 적은 순</button>
-    <button id="sort-desc">방문객 많은 순</button>
+    <button id="sort-asc" aria-pressed="false">방문객 적은 순</button>
+    <button id="sort-desc" aria-pressed="false">방문객 많은 순</button>
   </div>
   <div id="cards"></div>
   </main>
@@ -835,11 +836,15 @@
       renderCards([...allItems].sort((a, b) => a.visitors - b.visitors));
       document.getElementById('sort-asc').classList.add('is-active');
       document.getElementById('sort-desc').classList.remove('is-active');
+      document.getElementById('sort-asc').setAttribute('aria-pressed', 'true');
+      document.getElementById('sort-desc').setAttribute('aria-pressed', 'false');
     });
     document.getElementById('sort-desc').addEventListener('click', () => {
       renderCards([...allItems].sort((a, b) => b.visitors - a.visitors));
       document.getElementById('sort-desc').classList.add('is-active');
       document.getElementById('sort-asc').classList.remove('is-active');
+      document.getElementById('sort-desc').setAttribute('aria-pressed', 'true');
+      document.getElementById('sort-asc').setAttribute('aria-pressed', 'false');
     });
     document.getElementById('reset-filter').addEventListener('click', () => {
       document.getElementById('min-visitors').value = '';
