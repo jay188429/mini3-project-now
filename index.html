@@ -373,6 +373,8 @@
   .section-label small { color:#b9c9e2; letter-spacing:0; text-transform:none; font-size:12px; }
   .site-footer { margin-top:34px; padding:20px 0 4px; border-top:1px solid rgba(228,174,91,.35); display:flex; justify-content:space-between; gap:18px; color:#b9c9e2; font-size:12px; }
   .site-footer a { color:#f0c866; }
+  #app-status { margin:8px 0 12px; color:#b9c9e2; font-size:12px; }
+  #app-status[data-state="error"] { color:#ffb19d; }
   #insights { margin:26px 0 22px; padding:17px 18px; background:rgba(47,22,28,.46); border:1px solid rgba(228,174,91,.5); border-radius:10px; box-shadow:0 14px 32px rgba(0,0,0,.18); }
   #insights h2 { margin:0 0 4px; color:#fff8df; font-size:17px; }
   .insight-copy { margin:0 0 13px; color:#b9c9e2; font-size:12px; }
@@ -409,6 +411,7 @@
   </section>
   <div class="section-label"><span>01 · 후보 탐색</span><small>조건을 좁히고 결과를 비교하세요</small></div>
   <p id="total">총 0개</p>
+  <p id="app-status" role="status" aria-live="polite">데이터를 불러오는 중입니다.</p>
 
   <div id="filter-bar">
     <div class="filter-heading"><strong>조건으로 후보 찾기</strong><span>조건을 적용하면 아래 목록이 즉시 갱신됩니다.</span></div>
@@ -772,6 +775,9 @@
       .then(res => res.json())
       .then(items => {
         allItems = items;
+        const appStatus = document.getElementById('app-status');
+        appStatus.textContent = '데이터를 불러왔습니다. 조건을 입력해 후보를 비교해 보세요.';
+        appStatus.dataset.state = 'ready';
         rankByName = new Map(
           [...items]
             .sort((a, b) => b.visitors - a.visitors)
@@ -792,6 +798,12 @@
 
         applyFilter();
         renderHeatmap(items);
+      })
+      .catch(() => {
+        const appStatus = document.getElementById('app-status');
+        appStatus.textContent = '데이터를 불러오지 못했습니다. 잠시 후 페이지를 새로고침해 주세요.';
+        appStatus.dataset.state = 'error';
+        document.getElementById('recommend-button').disabled = true;
       });
 
     document.getElementById('apply-filter').addEventListener('click', () => {
