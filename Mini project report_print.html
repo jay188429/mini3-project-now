@@ -33,7 +33,8 @@
   .insight b { display:block; margin-bottom:1mm; color:#0b477f; }
   .note { padding:3mm 4mm; border-left:3px solid #d6a33a; background:#fff8e8; }
   .compact li { margin:.6mm 0; }
-  .page-break { break-before: page; }
+  .page-break { display:none; }
+  table th:first-child, table td:first-child { width:24mm; }
   footer { margin-top:5mm; padding-top:2mm; border-top:1px solid #ccd7e2; color:#718399; font-size:8.5pt; }
 </style>
 </head>
@@ -74,7 +75,6 @@
   <h2>5. 구현 결과와 운영 판단</h2>
   <ul class="compact"><li>필터, 후보 카드, 후보 없음 안내는 배포 주소에서 동작한다.</li><li>정상·후보 1개·후보 없음 조건에서 후보 수와 데이터 값은 일치했다.</li><li>Gemini 무료 API 한도 도달 시 사용자 안내가 표시된다.</li><li>추천 결과가 후보 목록 밖이거나 원본 데이터와 맞지 않으면 카드에 반영하지 않는다.</li><li><b>결재 판단: 조건부 승인.</b> 추천 지속 성공률과 비용은 운영 관찰이 필요하다.</li></ul>
 
-  <div class="page-break"></div>
   <h2>6. 측정과 사용자 확인</h2>
   <ul class="compact"><li><code>apply_filter</code>, <code>get_recommendation</code>, <code>select_item</code> 이벤트를 구성했다.</li><li>GTM 미리보기에서 태그 실행, GA4 DebugView에서 <code>select_item</code> 1회 도착을 확인했다.</li><li>M18 짝 테스트에서 조건 적용 → 추천 요청 → 결과 확인 순서로 과제를 끝냈다.</li><li>M19에서 음수·잘못된 방문객 수 입력을 전용 안내로 처리했다.</li><li><code>select_item</code> 1회는 도착 증거이지 회원 전체의 전환율은 아니다.</li></ul>
 
