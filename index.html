@@ -393,6 +393,11 @@
   .heatmap-country { justify-content:flex-start; padding-left:8px; color:#dbe7fa; font-size:11px; }
   .heatmap-legend { display:flex; align-items:center; gap:5px; margin-top:10px; color:#b9c9e2; font-size:10px; }
   .legend-swatch { width:18px; height:10px; border-radius:2px; }
+  .heatmap-table { width:100%; min-width:700px; border-collapse:separate; border-spacing:3px; table-layout:fixed; }
+  .heatmap-table th { color:#cbd8ef; font-size:10px; font-weight:500; line-height:1.2; padding:3px; }
+  .heatmap-table th:first-child { width:145px; text-align:left; }
+  .heatmap-table td { height:28px; padding:0; border:0; border-radius:4px; text-align:center; color:#fff; font-size:11px; }
+  .heatmap-table td.country-label { padding-left:8px; text-align:left; color:#dbe7fa; background:transparent !important; }
   #cards { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
   #cards .card { min-width: 0; }
   #sort-buttons button.is-active { background:#d6a33a; color:#071b3f; border-color:#f0c866; }
@@ -610,21 +615,21 @@
           : item.visitors >= bin.from && item.visitors < bin.to;
       }).length));
       const maxCount = Math.max(...counts.flat(), 1);
-      const cells = ['<div></div>'];
-      bins.forEach(bin => cells.push(`<div class="heatmap-head">${bin.from / 1000000}–${bin.to / 1000000}M</div>`));
+      let table = '<table class="heatmap-table"><thead><tr><th scope="col">국가</th>';
+      bins.forEach(bin => { table += `<th scope="col">${bin.from / 1000000}–${bin.to / 1000000}M</th>`; });
+      table += '</tr></thead><tbody>';
       countries.forEach((country, row) => {
-        cells.push(`<div class="heatmap-cell heatmap-country">${country}</div>`);
+        table += `<tr><td class="country-label">${country}</td>`;
         counts[row].forEach((count, col) => {
           const intensity = count === 0 ? 0 : Math.max(.18, count / maxCount);
           const palette = ['#172b4d', '#284b75', '#416f9f', '#8e8457', '#d6a33a'];
           const color = count === 0 ? palette[0] : palette[Math.min(4, Math.ceil(intensity * 4))];
-          cells.push(`<div class="heatmap-cell" style="background:${color}" aria-label="${country}, ${bins[col].from / 1000000}–${bins[col].to / 1000000} million: ${count}곳">${count}</div>`);
+          table += `<td style="background:${color}" aria-label="${country}, ${bins[col].from / 1000000}–${bins[col].to / 1000000} million: ${count}곳" title="${country}, ${bins[col].from / 1000000}–${bins[col].to / 1000000}M: ${count}곳">${count}</td>`;
         });
+        table += '</tr>';
       });
-      heatmap.innerHTML = cells.join('');
-      heatmap.querySelectorAll('.heatmap-cell').forEach(cell => {
-        if (!cell.classList.contains('heatmap-country')) cell.title = cell.getAttribute('aria-label');
-      });
+      table += '</tbody></table>';
+      heatmap.innerHTML = table;
     }
 
     function binIndexFor(bins, visitors) {
