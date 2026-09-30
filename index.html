@@ -145,6 +145,8 @@
     margin: 0 0 12px;
     color: #12633f;
   }
+  .evidence-meta { display:flex; flex-wrap:wrap; gap:7px; margin:0 0 12px; }
+  .evidence-chip { padding:4px 8px; border:1px solid rgba(143,224,202,.4); border-radius:999px; color:#b9e9da; font-size:11px; }
   #evidence-chart-title {
     font-size: 12px;
     color: #666;
@@ -437,6 +439,7 @@
   <div id="evidence" hidden>
     <h2 class="evidence-heading"><span>추천 근거</span><span id="evidence-status" class="status-pill" data-state="idle">대기</span></h2>
     <p id="evidence-pick" aria-live="polite" aria-atomic="true"></p>
+    <div id="evidence-meta" class="evidence-meta" hidden aria-label="추천 데이터 검증"></div>
     <svg id="evidence-chart" width="100%" height="180" viewBox="0 0 560 180"></svg>
   </div>
 
@@ -679,12 +682,19 @@
       status.textContent = label;
     }
 
+    function renderEvidenceMeta(item) {
+      const meta = document.getElementById('evidence-meta');
+      meta.innerHTML = `<span class="evidence-chip">후보 목록 포함</span><span class="evidence-chip">방문객 ${item.visitors.toLocaleString()}명</span><span class="evidence-chip">국가 ${item.country}</span><span class="evidence-chip">data.json 대조 완료</span>`;
+      meta.hidden = false;
+    }
+
     async function recommend() {
       const bins = computeHistogram(allItems);
       const button = document.getElementById('recommend-button');
 
       highlightCard(null);
       document.getElementById('evidence').hidden = false;
+      document.getElementById('evidence-meta').hidden = true;
 
       if (currentFiltered.length === 0) {
         setEvidenceState('empty', '후보 없음');
@@ -756,6 +766,7 @@
         setEvidenceState('success', '추천 완료');
 
         const pick = candidates.find(c => c.name === data.name);
+        renderEvidenceMeta(pick);
         const idx = binIndexFor(bins, pick.visitors);
         renderHistogram(bins, idx);
         highlightCard(data.name);
