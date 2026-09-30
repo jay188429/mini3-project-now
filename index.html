@@ -3,6 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+  window.dataLayer = window.dataLayer || [];
+</script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-MQNWSZ93');</script>
+<!-- End Google Tag Manager -->
 <title>미술관 비교 도우미</title>
 <style>
   body {
@@ -203,6 +209,9 @@
 </style>
 </head>
 <body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MQNWSZ93" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
   <h1>미술관 비교 도우미</h1>
   <p id="total">총 0개</p>
 
@@ -271,6 +280,16 @@
           <p>국가: ${item.country}</p>
           <a href="${item.detail_url}" target="_blank" rel="noopener">원래 화면 보기</a>
         `;
+        card.querySelector('a').addEventListener('click', () => {
+          window.dataLayer.push({ ecommerce: null });
+          window.dataLayer.push({
+            event: 'select_item',
+            ecommerce: {
+              item_list_name: card.classList.contains('recommended') ? 'ai_recommendation' : 'filtered_list',
+              items: [{ item_name: item.name, price: item.visitors }]
+            }
+          });
+        });
         cardsEl.appendChild(card);
       });
     }
@@ -439,6 +458,7 @@
       document.getElementById('evidence').hidden = false;
 
       if (currentFiltered.length === 0) {
+        window.dataLayer.push({ event: 'get_recommendation', candidate_count: 0, result_status: 'error' });
         document.getElementById('evidence-pick').textContent =
           '조건에 맞는 후보가 없어 추천할 수 없습니다. 아래는 전체 방문객 수 분포입니다.';
         renderHistogram(bins, -1);
@@ -483,6 +503,7 @@
                 : failure && failure.error === 'invalid_candidates'
                   ? '추천 후보를 확인하지 못했습니다. 조건을 다시 적용해 주세요.'
                 : '잠시 뒤 다시 눌러 주세요.';
+          window.dataLayer.push({ event: 'get_recommendation', candidate_count: candidates.length, result_status: 'error' });
           return;
         }
 
@@ -493,6 +514,7 @@
             data.error === 'not_in_candidates'
               ? '추천 이름이 후보 목록에 없어 확인하지 못했습니다.'
               : '추천을 확인하지 못했습니다.';
+          window.dataLayer.push({ event: 'get_recommendation', candidate_count: candidates.length, result_status: data.error || 'error' });
           return;
         }
 
@@ -503,8 +525,10 @@
         const idx = binIndexFor(bins, pick.visitors);
         renderHistogram(bins, idx);
         highlightCard(data.name);
+        window.dataLayer.push({ event: 'get_recommendation', candidate_count: candidates.length, result_status: 'success' });
       } catch (err) {
         document.getElementById('evidence-pick').textContent = '잠시 뒤 다시 눌러 주세요.';
+        window.dataLayer.push({ event: 'get_recommendation', candidate_count: candidates.length, result_status: 'error' });
       } finally {
         button.disabled = false;
         filterControls.forEach(control => { control.disabled = false; });
@@ -529,7 +553,16 @@
         applyFilter();
       });
 
-    document.getElementById('apply-filter').addEventListener('click', applyFilter);
+    document.getElementById('apply-filter').addEventListener('click', () => {
+      applyFilter();
+      const minInput = document.getElementById('min-visitors').value.trim();
+      window.dataLayer.push({
+        event: 'apply_filter',
+        min_visitors: minInput === '' ? null : Number(minInput),
+        country: document.getElementById('country-select').value || null,
+        result_count: currentFiltered.length
+      });
+    });
     document.getElementById('min-visitors').addEventListener('input', applyFilter);
     document.getElementById('country-select').addEventListener('change', applyFilter);
     document.getElementById('recommend-button').addEventListener('click', recommend);
