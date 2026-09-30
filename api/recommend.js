@@ -140,10 +140,11 @@ module.exports = async (req, res) => {
       return;
     }
 
+    const picked = candidates.find(candidate => candidate.name === parsed.name);
     res.status(200).json({
       name: parsed.name,
-      reason1: parsed.reason1 || '',
-      reason2: parsed.reason2 || ''
+      reason1: parsed.reason1 || `방문객 ${picked.visitors.toLocaleString()}명으로 조건을 만족합니다.`,
+      reason2: parsed.reason2 || `${picked.country} 후보 목록에 포함된 미술관입니다.`
     });
   } catch (err) {
     res.status(502).json({ error: 'call_failed' });
