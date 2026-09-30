@@ -59,6 +59,9 @@
     gap: 12px;
     align-items: flex-end;
   }
+  .filter-heading { width:100%; display:flex; justify-content:space-between; align-items:baseline; gap:12px; margin-bottom:2px; }
+  .filter-heading strong { color:#fff8df; font-size:15px; }
+  .filter-heading span { color:#b9c9e2; font-size:12px; }
   #filter-bar label {
     display: flex;
     flex-direction: column;
@@ -66,6 +69,7 @@
     color: #555;
     gap: 4px;
   }
+  .input-hint { color:#8fa6c7; font-size:10px; }
   #filter-bar input,
   #filter-bar select {
     font-family: inherit;
@@ -188,6 +192,11 @@
     font-size: 14px;
     color: #333;
   }
+  .card-visitor { margin: 10px 0 5px; }
+  .card-visitor span { display:block; color:#b9c9e2; font-size:11px; }
+  .card-visitor strong { display:block; color:#fff8df; font-size:20px; letter-spacing:.01em; }
+  .card-country { color:#d5e2f5 !important; font-size:12px !important; }
+  .card-country::before { content:'국가 · '; color:#b9c9e2; }
   .card a {
     display: inline-block;
     margin-top: 10px;
@@ -198,6 +207,7 @@
   .card a:hover {
     text-decoration: underline;
   }
+  .card:hover { transform: translateY(-3px); transition: transform .2s ease, box-shadow .2s ease; }
   .card.recommended {
     border-color: #d6a33a;
     box-shadow: 0 0 0 2px #d6a33a;
@@ -274,6 +284,7 @@
     color: #f7fbff;
     box-shadow: 0 12px 28px rgba(0, 0, 0, 0.2);
     backdrop-filter: blur(8px);
+    transition: transform .2s ease, box-shadow .2s ease;
   }
   .card h2 {
     color: #fff8df;
@@ -372,7 +383,7 @@
   .legend-swatch { width:18px; height:10px; border-radius:2px; }
   #cards { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
   #cards .card { min-width: 0; }
-  @media (max-width:600px) { .site-header,.site-footer { align-items:flex-start; flex-direction:column; } .site-nav { gap:12px; } .intro-copy { font-size:14px; } }
+  @media (max-width:600px) { .site-header,.site-footer { align-items:flex-start; flex-direction:column; } .site-nav { gap:12px; } .intro-copy { font-size:14px; } .filter-heading { align-items:flex-start; flex-direction:column; gap:2px; } }
   @media (min-width:601px) and (max-width:980px) { #cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   @media (max-width:600px) { #cards { grid-template-columns: 1fr; } }
 </style>
@@ -397,9 +408,11 @@
   <p id="total">총 0개</p>
 
   <div id="filter-bar">
+    <div class="filter-heading"><strong>조건으로 후보 찾기</strong><span>조건을 적용하면 아래 목록이 즉시 갱신됩니다.</span></div>
     <label>
       최소 방문객 수
       <input type="number" id="min-visitors" min="0" placeholder="예: 2000000">
+      <span class="input-hint">0 이상의 정수</span>
     </label>
     <label>
       국가
@@ -452,8 +465,8 @@
       card.innerHTML = `
           <div class="card-rank">${rank}위</div>
           <h2>${item.name}</h2>
-          <p>방문객: ${item.visitors.toLocaleString()}</p>
-          <p>국가: ${item.country}</p>
+          <p class="card-visitor"><span>연간 방문객</span><strong>${item.visitors.toLocaleString()}</strong></p>
+          <p class="card-country">${item.country}</p>
           <a href="${item.detail_url}" target="_blank" rel="noopener">원래 화면 보기</a>
         `;
         card.querySelector('a').addEventListener('click', () => {
