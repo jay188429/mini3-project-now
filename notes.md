@@ -1,4 +1,4 @@
-# 미니3: Museum Atlas
+# 미니3: LUMEN ATLAS
 
 ## 다시 실행하는 순서
 1. 수집 스크립트(`01_collect_p1.py` · `02_collect.py`)는 다시 돌리지 않는다 — `raw.csv`가 원본이다.
