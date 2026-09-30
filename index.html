@@ -372,6 +372,11 @@
   .stat { min-width:126px; padding:10px 13px; border:1px solid rgba(228,174,91,.45); border-radius:10px; background:rgba(7,27,63,.48); }
   .stat strong { display:block; color:#fff8df; font-size:18px; }
   .stat span { display:block; color:#b9c9e2; font-size:11px; margin-top:2px; }
+  .provenance { margin-top:14px; color:#b9c9e2; font-size:12px; }
+  .provenance summary { width:max-content; cursor:pointer; color:#f0c866; }
+  .provenance summary:hover { color:#fff8df; }
+  .provenance-body { max-width:650px; margin-top:8px; padding:10px 12px; border-left:2px solid rgba(228,174,91,.55); background:rgba(7,27,63,.36); line-height:1.65; }
+  .provenance-body a { color:#f0c866; }
   .section-label { display:flex; justify-content:space-between; align-items:baseline; gap:10px; margin:24px 0 10px; color:#f7d995; font-size:12px; letter-spacing:.12em; text-transform:uppercase; }
   .section-label small { color:#b9c9e2; letter-spacing:0; text-transform:none; font-size:12px; }
   .site-footer { margin-top:34px; padding:20px 0 4px; border-top:1px solid rgba(228,174,91,.35); display:flex; justify-content:space-between; gap:18px; color:#b9c9e2; font-size:12px; }
@@ -411,6 +416,7 @@
     <h1>LUMEN ATLAS</h1>
     <p class="intro-copy">방문객 수와 국가 데이터를 바탕으로, 비교할 미술관을 빠르게 좁혀 보세요. 후보 안에서만 AI 추천을 요청하고, 선택의 근거를 데이터와 함께 확인할 수 있습니다.</p>
     <div class="stats" aria-label="데이터 요약"><div class="stat"><strong id="stat-total">72</strong><span>미술관 데이터</span></div><div class="stat"><strong id="stat-countries">—</strong><span>국가</span></div><div class="stat"><strong>2026.09</strong><span>최근 수집</span></div></div>
+    <details class="provenance"><summary>데이터 출처와 수집 기준 보기</summary><div class="provenance-body">출처: <a href="https://en.wikipedia.org/wiki/List_of_most-visited_museums" target="_blank" rel="noopener">Wikipedia · List of most-visited museums</a><br>수집일: 2026년 9월 28일 · 정제 후 72행<br>방문객 수를 숫자로 정리하고 국가별 비교와 조건 필터에 사용했습니다.</div></details>
   </section>
   <div class="section-label"><span>01 · 후보 탐색</span><small>조건을 좁히고 결과를 비교하세요</small></div>
   <p id="total">총 0개</p>
