@@ -56,20 +56,19 @@
     background: #fff;
     border: 1px solid #ddd;
     border-radius: 8px;
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: max-content max-content max-content max-content 1fr;
     gap: 12px;
-    align-items: flex-end;
+    align-items: start;
   }
-  .filter-heading { width:100%; display:flex; justify-content:space-between; align-items:baseline; gap:12px; margin-bottom:2px; }
+  .filter-heading { grid-column: 1 / -1; width:100%; display:flex; justify-content:space-between; align-items:baseline; gap:12px; margin-bottom:2px; }
   .filter-heading strong { color:#fff8df; font-size:15px; }
   .filter-heading span { color:#b9c9e2; font-size:12px; }
   #filter-bar label {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-rows: 24px 36px 16px;
     font-size: 13px;
     color: #555;
-    gap: 4px;
   }
   .input-hint { color:#8fa6c7; font-size:10px; }
   #filter-bar input,
@@ -96,6 +95,10 @@
   #filter-bar button:hover {
     background: #efc866;
     transform: translateY(-1px);
+  }
+  #filter-bar > button {
+    align-self: start;
+    margin-top: 24px;
   }
   #reset-filter { background: transparent !important; color:#f0c866 !important; border-color:rgba(240,200,102,.55) !important; font-weight:600 !important; }
   #reset-filter:hover { background:rgba(240,200,102,.12) !important; }
@@ -334,6 +337,7 @@
       padding: 11px 12px;
       gap: 9px;
       background: rgba(47, 22, 28, 0.44);
+      grid-template-columns: 1fr;
     }
     #filter-bar label,
     #filter-bar input,
@@ -344,6 +348,7 @@
     }
     #filter-bar button {
       margin-top: 2px;
+      align-self: stretch;
     }
     #recommend-bar {
       display: flex;
@@ -385,8 +390,15 @@
   .site-footer a { color:#f0c866; }
   #app-status { margin:8px 0 12px; color:#b9c9e2; font-size:12px; }
   #app-status[data-state="error"] { color:#ffb19d; }
-  #insights { margin:26px 0 22px; padding:17px 18px; background:rgba(47,22,28,.46); border:1px solid rgba(228,174,91,.5); border-radius:10px; box-shadow:0 14px 32px rgba(0,0,0,.18); }
-  #insights h2 { margin:0 0 4px; color:#fff8df; font-size:17px; }
+  #insights { margin:26px 0 22px; background:rgba(47,22,28,.3); border:1px solid rgba(228,174,91,.38); border-radius:10px; box-shadow:0 10px 24px rgba(0,0,0,.12); overflow:hidden; }
+  #insights summary { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:13px 16px; color:#fff8df; cursor:pointer; list-style:none; }
+  #insights summary::-webkit-details-marker { display:none; }
+  #insights summary::after { content:'＋'; color:#f0c866; font-size:18px; line-height:1; }
+  #insights[open] summary { border-bottom:1px solid rgba(228,174,91,.25); }
+  #insights[open] summary::after { content:'−'; }
+  .insights-title { font-size:14px; font-weight:700; }
+  .insights-toggle { margin-left:auto; color:#9fb3d1; font-size:11px; font-weight:400; }
+  .insight-body { padding:14px 16px 16px; }
   .insight-copy { margin:0 0 13px; color:#b9c9e2; font-size:12px; }
   .heatmap-wrap { overflow-x:auto; padding-bottom:4px; }
   #heatmap { display:grid; grid-template-columns:145px repeat(9, minmax(58px, 1fr)); min-width:700px; gap:3px; }
@@ -458,18 +470,20 @@
     <svg id="evidence-chart" width="100%" height="180" viewBox="0 0 560 180"></svg>
   </div>
 
-  <section id="insights" aria-labelledby="insights-title">
-    <h2 id="insights-title">데이터 인사이트</h2>
-    <p class="insight-copy">국가별 방문객 수 구간 분포 · 셀의 숫자는 해당 구간의 미술관 수입니다.</p>
-    <div id="heatmap" class="heatmap-wrap" style="display:grid;grid-template-columns:145px repeat(9,minmax(58px,1fr));min-width:700px;gap:3px;"></div>
-    <div class="heatmap-legend"><span>적음</span><span class="legend-swatch" style="background:#172b4d"></span><span class="legend-swatch" style="background:#416f9f"></span><span class="legend-swatch" style="background:#d6a33a"></span><span>많음</span></div>
-  </section>
-
   <div id="sort-buttons">
     <button id="sort-asc" aria-pressed="false">방문객 적은 순</button>
     <button id="sort-desc" aria-pressed="false">방문객 많은 순</button>
   </div>
   <div id="cards"></div>
+
+  <details id="insights" aria-labelledby="insights-title">
+    <summary><span id="insights-title" class="insights-title">데이터 인사이트</span><span class="insights-toggle">국가별 방문객 분포 보기</span></summary>
+    <div class="insight-body">
+      <p class="insight-copy">국가별 방문객 수 구간 분포 · 셀의 숫자는 해당 구간의 미술관 수입니다.</p>
+      <div id="heatmap" class="heatmap-wrap" style="display:grid;grid-template-columns:145px repeat(9,minmax(58px,1fr));min-width:700px;gap:3px;"></div>
+      <div class="heatmap-legend"><span>적음</span><span class="legend-swatch" style="background:#172b4d"></span><span class="legend-swatch" style="background:#416f9f"></span><span class="legend-swatch" style="background:#d6a33a"></span><span>많음</span></div>
+    </div>
+  </details>
   </main>
   <footer class="site-footer" id="about"><span>데이터 기반 미술관 비교 프로젝트 · Gemini 추천 보조</span><span><a href="M23_final_report.pdf">보고서</a> · <a href="https://github.com/jay188429/museum-compare-guide" target="_blank" rel="noopener">저장소</a></span></footer>
   </div>
