@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>LUMEN ATLAS 최종 보고서</title>
+<style>
+  @page { size: A4; margin: 14mm 16mm 16mm; }
+  * { box-sizing: border-box; }
+  body { margin:0; color:#173454; font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",Arial,sans-serif; font-size:10.5pt; line-height:1.55; }
+  h1 { margin:0 0 2mm; color:#0b315c; font-size:23pt; letter-spacing:-.04em; }
+  .subtitle { margin:0 0 4mm; color:#486581; font-size:13pt; font-weight:600; }
+  h2 { margin:7mm 0 3mm; padding:2mm 0 1.5mm 4mm; border-left:4px solid #d6a33a; border-bottom:1px solid #c6d2df; color:#0b315c; font-size:16pt; line-height:1.2; page-break-after:avoid; }
+  h3 { margin:4mm 0 1.5mm; color:#173f6b; font-size:12pt; page-break-after:avoid; }
+  p { margin:1.5mm 0; }
+  ul { margin:1.5mm 0 2mm 5mm; padding-left:4mm; }
+  li { margin:1mm 0; }
+  .kicker { color:#c48620; font-size:10pt; font-weight:700; letter-spacing:.08em; }
+  .lead { margin:0 0 5mm; color:#4d6781; font-size:12pt; }
+  .summary { display:grid; grid-template-columns:repeat(3,1fr); gap:3mm; margin:4mm 0 5mm; }
+  .summary article { padding:3.5mm; border:1px solid #d6a33a; border-radius:7px; background:#fff8e8; }
+  .summary strong { display:block; margin-bottom:1mm; color:#a46e14; font-size:9pt; }
+  .summary span { color:#173454; font-size:10pt; }
+  .meta { display:flex; gap:5mm; color:#60768d; font-size:9pt; }
+  table { width:100%; border-collapse:collapse; margin:2mm 0 3mm; font-size:9.5pt; page-break-inside:avoid; }
+  th { background:#e9eff5; color:#173454; text-align:left; }
+  th, td { padding:2mm 2.5mm; border:1px solid #c5d0dc; vertical-align:top; }
+  .figures { display:grid; grid-template-columns:1fr 1fr; gap:5mm; margin:2mm 0 3mm; }
+  figure { margin:0; padding:2.5mm; border:1px solid #d5dfe8; border-radius:6px; page-break-inside:avoid; }
+  figure img { display:block; width:100%; height:49mm; object-fit:contain; }
+  figcaption { margin-top:1.5mm; color:#49657e; font-size:9pt; }
+  .insights { display:grid; grid-template-columns:repeat(3,1fr); gap:3mm; margin:3mm 0 4mm; }
+  .insight { padding:3mm; border-radius:6px; background:#eff5fa; border-top:3px solid #416f9f; }
+  .insight b { display:block; margin-bottom:1mm; color:#0b477f; }
+  .note { padding:3mm 4mm; border-left:3px solid #d6a33a; background:#fff8e8; }
+  .compact li { margin:.6mm 0; }
+  .page-break { break-before: page; }
+  footer { margin-top:5mm; padding-top:2mm; border-top:1px solid #ccd7e2; color:#718399; font-size:8.5pt; }
+</style>
+</head>
+<body>
+  <div class="kicker">LUMEN ATLAS · FINAL REPORT</div>
+  <h1>LUMEN ATLAS 최종 보고서</h1>
+  <p class="subtitle">문제 · 데이터 · 운영 판단</p>
+  <p class="lead">방문객 수와 국가 조건으로 미술관 후보를 좁히고, 후보 안에서 AI 추천을 제공하는 비교 서비스</p>
+  <div class="meta"><span>수집일 2026-09-28</span><span>정제 데이터 72행</span><span>배포 world-museum-atlas.vercel.app</span></div>
+
+  <div class="summary">
+    <article><strong>무엇을 만들었나</strong><span>조건 필터 → 후보 비교 → 후보 내 AI 추천</span></article>
+    <article><strong>무엇을 확인했나</strong><span>원본·정제 데이터와 차트 합계 대조</span></article>
+    <article><strong>운영 판단</strong><span>조건부 승인 · 추천 지속 성공률 관찰 필요</span></article>
+  </div>
+
+  <h2>1. 문제와 대상</h2>
+  <p>운영진과 회원은 여러 나라의 미술관을 방문객 수와 국가 조건으로 비교한다. 목록을 직접 찾아야 하는 부담을 줄이기 위해 조건에 맞는 후보를 먼저 보여 주고, 후보 안에서 AI가 한 곳을 제안하도록 했다.</p>
+
+  <h2>2. 데이터와 정제</h2>
+  <table><tr><th>항목</th><th>내용</th></tr><tr><td>출처</td><td>Wikipedia <i>List of most-visited museums</i></td></tr><tr><td>수집·행 수</td><td>2026-09-28 · 원본 72 → 정제 72 · 빈 행 0</td></tr><tr><td>정제 규칙</td><td>방문객 수의 쉼표·단위를 제거해 정수 <code>visitors</code>로 변환 · 국가명 공백 정리</td></tr><tr><td>원문 대조</td><td>표본 3곳 중 3곳 일치</td></tr></table>
+
+  <h2>3. 탐색 — 그림 두 장</h2>
+  <div class="figures">
+    <figure><img src="charts/visitor_distribution_histogram.svg"><figcaption><b>그림 1.</b> 방문객 수 구간 분포</figcaption></figure>
+    <figure><img src="charts/country_average_visitors.png"><figcaption><b>그림 2.</b> 국가별 평균 방문객 수</figcaption></figure>
+  </div>
+  <div class="insights">
+    <div class="insight"><b>분포의 중심</b>1–2백만 구간이 29곳으로 가장 많다.</div>
+    <div class="insight"><b>합계 검증</b>구간 합계 72곳은 정제 행 수와 일치한다.</div>
+    <div class="insight"><b>해석 주의</b>Vatican·Brazil처럼 n=1인 국가의 평균은 일반화하지 않는다.</div>
+  </div>
+  <p class="note"><b>쓰임</b> 국가 평균은 규모 비교용 참고값이며, 개별 추천은 후보별 실제 방문객 수와 국가 데이터를 사용한다. Wikipedia 한 페이지의 72곳이므로 전체 미술관 분포로 일반화하지 않는다.</p>
+
+  <h2>4. 해결 방식과 AI 적용점</h2>
+  <table><tr><th>구분</th><th>적용 내용</th></tr><tr><td>필터</td><td>국가와 최소 방문객 수로 후보를 거르고, 후보 0개면 AI를 호출하지 않는다.</td></tr><tr><td>AI 범위</td><td>최대 5개 후보의 이름·방문객 수·국가만 전달한다. 후보 밖 이름, 새 숫자, 표에 없는 정보는 금지한다.</td></tr><tr><td>결정 규칙</td><td>후보 중 방문객 수가 가장 적어 조건 경계에 가까운 곳부터 판단하도록 지침을 제한한다.</td></tr><tr><td>검증·보안</td><td>서버가 추천 후보의 이름·방문객 수·국가를 <code>data/data.json</code>과 다시 대조하고, API 키는 Vercel 환경변수로 관리한다.</td></tr><tr><td>실패 처리</td><td>입력 오류·후보 0개·API 한도·상위 API 오류를 구분해 안내하며, 후보 밖 결과는 카드에 반영하지 않는다.</td></tr></table>
+
+  <h2>5. 구현 결과와 운영 판단</h2>
+  <ul class="compact"><li>필터, 후보 카드, 후보 없음 안내는 배포 주소에서 동작한다.</li><li>정상·후보 1개·후보 없음 조건에서 후보 수와 데이터 값은 일치했다.</li><li>Gemini 무료 API 한도 도달 시 사용자 안내가 표시된다.</li><li>추천 결과가 후보 목록 밖이거나 원본 데이터와 맞지 않으면 카드에 반영하지 않는다.</li><li><b>결재 판단: 조건부 승인.</b> 추천 지속 성공률과 비용은 운영 관찰이 필요하다.</li></ul>
+
+  <div class="page-break"></div>
+  <h2>6. 측정과 사용자 확인</h2>
+  <ul class="compact"><li><code>apply_filter</code>, <code>get_recommendation</code>, <code>select_item</code> 이벤트를 구성했다.</li><li>GTM 미리보기에서 태그 실행, GA4 DebugView에서 <code>select_item</code> 1회 도착을 확인했다.</li><li>M18 짝 테스트에서 조건 적용 → 추천 요청 → 결과 확인 순서로 과제를 끝냈다.</li><li>M19에서 음수·잘못된 방문객 수 입력을 전용 안내로 처리했다.</li><li><code>select_item</code> 1회는 도착 증거이지 회원 전체의 전환율은 아니다.</li></ul>
+
+  <h2>7. 한계와 다음 단계</h2>
+  <ul><li>Wikipedia 한 페이지 72개라 최신성과 전체 대표성이 제한된다.</li><li>무료 API 한도와 호출 비용을 아직 수치로 확인하지 않았다.</li><li>짝 1명과 내 재검사만으로 모든 회원의 사용성을 판단할 수 없다.</li><li>한 달 동안 추천 성공·한도·오류와 <code>select_item</code> 비율을 관찰한다.</li><li>2~3명의 추가 회원에게 같은 과제를 주고 모바일 차이와 멈춘 화면을 기록한다.</li></ul>
+
+  <h2>실행 안내 확인 상태</h2>
+  <table><tr><th>순서</th><th>명령</th><th>만드는 것</th><th>상태</th></tr><tr><td>1</td><td><code>python scripts/02_collect.py</code></td><td><code>data/raw.csv</code></td><td>확인 안 함</td></tr><tr><td>2</td><td><code>python scripts/03_clean.py</code></td><td><code>data/clean.csv</code></td><td>확인 안 함</td></tr><tr><td>3</td><td><code>python scripts/05_hist.py</code></td><td><code>charts/hist.png</code></td><td>확인 안 함</td></tr><tr><td>4</td><td><code>python scripts/06_by_category.py</code></td><td><code>charts/by_category.png</code></td><td>확인 안 함</td></tr><tr><td>5</td><td><code>python scripts/07_export_json.py</code></td><td><code>data/data.json</code></td><td>확인 안 함</td></tr></table>
+  <footer>운영진 실행 위치: README.md와 index.html이 있는 저장소 최상위 폴더</footer>
+</body>
+</html>

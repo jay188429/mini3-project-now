@@ -34,4 +34,4 @@ Vercel 프로젝트 환경변수에 이름 `GEMINI_API_KEY`를 추가하고 값�
 
 - 원본·정제·웹용 데이터 : `data/raw.csv`, `data/clean.csv`, `data/data.json`
 - 차트 : `charts/hist.png`, `charts/by_category.png`, `charts/country_average_visitors.png`, `charts/visitor_distribution_histogram.svg`
-- 보고서 : `M23_final_report.md`, `M23_final_report.pdf`, `M21_report.md`, `M21_report.pdf`
+- 보고서 : `Mini project report.md`, `Mini project report.pdf`, `M21_report.md`, `M21_report.pdf`
