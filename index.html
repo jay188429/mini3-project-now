@@ -229,8 +229,8 @@
   }
   #filter-bar,
   #evidence {
-    background: rgba(7, 27, 63, 0.86);
-    border: 1px solid rgba(218, 170, 72, 0.55);
+    background: rgba(47, 22, 28, 0.68);
+    border: 1px solid rgba(228, 174, 91, 0.62);
     box-shadow: 0 14px 32px rgba(0, 0, 0, 0.22);
     backdrop-filter: blur(10px);
   }
@@ -239,9 +239,9 @@
   }
   #filter-bar input,
   #filter-bar select {
-    background: #f8f5ed;
-    color: #13294b;
-    border-color: #d6a33a;
+    background: #f1e1c7;
+    color: #3c2020;
+    border-color: #d6a35a;
   }
   #cards .card {
     background: rgba(7, 27, 63, 0.88);
@@ -280,6 +280,42 @@
     background: rgba(54, 39, 12, 0.88);
     border-color: #d6a33a;
     color: #ffe8a7;
+  }
+
+  @media (max-width: 600px) {
+    body {
+      padding: 14px;
+      background-position: 62% center;
+    }
+    #filter-bar {
+      padding: 11px 12px;
+      gap: 9px;
+      background: rgba(47, 22, 28, 0.58);
+    }
+    #filter-bar label,
+    #filter-bar input,
+    #filter-bar select,
+    #filter-bar button {
+      width: 100%;
+      box-sizing: border-box;
+    }
+    #filter-bar button {
+      margin-top: 2px;
+    }
+    #recommend-bar {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    #recommend-button {
+      width: 100%;
+    }
+    #total {
+      line-height: 1.45;
+    }
+    #cards {
+      grid-template-columns: 1fr;
+    }
   }
 </style>
 </head>
