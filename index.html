@@ -267,10 +267,6 @@
     let allItems = [];
     let currentFiltered = [];
 
-    function displayCountry(country) {
-      return country === 'United Kingdom' ? '영국' : country;
-    }
-
     function renderCards(items) {
       const cardsEl = document.getElementById('cards');
       cardsEl.innerHTML = '';
@@ -281,7 +277,7 @@
         card.innerHTML = `
           <h2>${item.name}</h2>
           <p>방문객: ${item.visitors.toLocaleString()}</p>
-          <p>국가: ${displayCountry(item.country)}</p>
+          <p>국가: ${item.country}</p>
           <a href="${item.detail_url}" target="_blank" rel="noopener">원래 화면 보기</a>
         `;
         card.querySelector('a').addEventListener('click', () => {
@@ -550,7 +546,7 @@
         countries.forEach(c => {
           const opt = document.createElement('option');
           opt.value = c;
-          opt.textContent = displayCountry(c);
+          opt.textContent = c;
           select.appendChild(opt);
         });
 
