@@ -94,6 +94,8 @@
     background: #efc866;
     transform: translateY(-1px);
   }
+  #reset-filter { background: transparent !important; color:#f0c866 !important; border-color:rgba(240,200,102,.55) !important; font-weight:600 !important; }
+  #reset-filter:hover { background:rgba(240,200,102,.12) !important; }
   #empty-notice {
     background: #fff8e1;
     border: 1px solid #ffe082;
@@ -383,6 +385,7 @@
   .legend-swatch { width:18px; height:10px; border-radius:2px; }
   #cards { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
   #cards .card { min-width: 0; }
+  #sort-buttons button.is-active { background:#d6a33a; color:#071b3f; border-color:#f0c866; }
   @media (max-width:600px) { .site-header,.site-footer { align-items:flex-start; flex-direction:column; } .site-nav { gap:12px; } .intro-copy { font-size:14px; } .filter-heading { align-items:flex-start; flex-direction:column; gap:2px; } }
   @media (min-width:601px) and (max-width:980px) { #cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   @media (max-width:600px) { #cards { grid-template-columns: 1fr; } }
@@ -421,6 +424,7 @@
       </select>
     </label>
     <button id="apply-filter">적용</button>
+    <button id="reset-filter" type="button">조건 초기화</button>
   </div>
 
   <div id="recommend-bar">
@@ -806,9 +810,19 @@
 
     document.getElementById('sort-asc').addEventListener('click', () => {
       renderCards([...allItems].sort((a, b) => a.visitors - b.visitors));
+      document.getElementById('sort-asc').classList.add('is-active');
+      document.getElementById('sort-desc').classList.remove('is-active');
     });
     document.getElementById('sort-desc').addEventListener('click', () => {
       renderCards([...allItems].sort((a, b) => b.visitors - a.visitors));
+      document.getElementById('sort-desc').classList.add('is-active');
+      document.getElementById('sort-asc').classList.remove('is-active');
+    });
+    document.getElementById('reset-filter').addEventListener('click', () => {
+      document.getElementById('min-visitors').value = '';
+      document.getElementById('country-select').value = '';
+      applyFilter();
+      window.dataLayer.push({ event: 'apply_filter', min_visitors: null, country: null, result_count: currentFiltered.length });
     });
   </script>
 </body>
