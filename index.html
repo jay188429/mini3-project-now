@@ -37,13 +37,16 @@
     font-size: 13px;
     padding: 6px 12px;
     margin-right: 8px;
-    border: 1px solid #ccc;
+    border: 1px solid rgba(218, 170, 72, 0.7);
     border-radius: 6px;
-    background: #fff;
+    background: rgba(7, 27, 63, 0.92);
+    color: #fff8df;
     cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
   }
   #sort-buttons button:hover {
-    background: #eee;
+    background: #173a72;
+    transform: translateY(-1px);
   }
   #filter-bar {
     margin: 0 0 20px;
@@ -75,14 +78,17 @@
     font-family: inherit;
     font-size: 14px;
     padding: 7px 16px;
-    border: 1px solid #1a56db;
+    border: 1px solid #c8942e;
     border-radius: 6px;
-    background: #1a56db;
-    color: #fff;
+    background: #d6a33a;
+    color: #071b3f;
     cursor: pointer;
+    font-weight: 700;
+    transition: background 0.2s ease, transform 0.2s ease;
   }
   #filter-bar button:hover {
-    background: #1442aa;
+    background: #efc866;
+    transform: translateY(-1px);
   }
   #empty-notice {
     background: #fff8e1;
@@ -99,14 +105,17 @@
     font-family: inherit;
     font-size: 14px;
     padding: 8px 18px;
-    border: 1px solid #0f8a5f;
+    border: 1px solid #c8942e;
     border-radius: 6px;
-    background: #12a06e;
-    color: #fff;
+    background: #d6a33a;
+    color: #071b3f;
     cursor: pointer;
+    font-weight: 700;
+    transition: background 0.2s ease, transform 0.2s ease;
   }
   #recommend-button:hover {
-    background: #0f8a5f;
+    background: #efc866;
+    transform: translateY(-1px);
   }
   #evidence {
     margin-top: 24px;
@@ -171,8 +180,8 @@
     text-decoration: underline;
   }
   .card.recommended {
-    border-color: #12a06e;
-    box-shadow: 0 0 0 2px #12a06e;
+    border-color: #d6a33a;
+    box-shadow: 0 0 0 2px #d6a33a;
   }
   #recommend-button:disabled {
     opacity: 0.6;
